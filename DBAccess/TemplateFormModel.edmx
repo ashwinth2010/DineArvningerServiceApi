@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dinearvningerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CREDENTIALS_API">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdDateTime" Type="datetime" />
+          <Property Name="modificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SESSIONS_API">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdDateTime" Type="datetime" />
+          <Property Name="modificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Testamenta_form_API">
+          <Key>
+            <PropertyRef Name="formId" />
+          </Key>
+          <Property Name="formId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="session_id" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="hvordan_vil_du_oprette_testamentet" Type="varchar" MaxLength="40" />
+          <Property Name="hvilket_testamente_onskes" Type="varchar" MaxLength="40" />
+          <Property Name="civilstand" Type="varchar" MaxLength="40" />
+          <Property Name="dit_navn" Type="varchar" MaxLength="100" />
+          <Property Name="dit_aegtefaelles_navn" Type="varchar" MaxLength="100" />
+          <Property Name="har_du_tidligere_opretettet_testamente_selv" Type="bit" />
+          <Property Name="har_du_tidligere_opretettet_testamente_aegtefaelle" Type="bit" />
+          <Property Name="har_du_saereje_selv" Type="bit" />
+          <Property Name="har_du_saereje_aegtefaelle" Type="bit" />
+          <Property Name="createdDateTime" Type="datetime" />
+          <Property Name="modificationDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Testament__sessi__3D5E1FD2">
+          <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
+          <End Role="Testamenta_form_API" Type="Self.Testamenta_form_API" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Testamenta_form_API">
+              <PropertyRef Name="session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dinearvningerModelStoreContainer">
+          <EntitySet Name="CREDENTIALS_API" EntityType="Self.CREDENTIALS_API" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SESSIONS_API" EntityType="Self.SESSIONS_API" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testamenta_form_API" EntityType="Self.Testamenta_form_API" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Testament__sessi__3D5E1FD2" Association="Self.FK__Testament__sessi__3D5E1FD2">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dinearvningerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CREDENTIALS_API">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdDateTime" Type="DateTime" Precision="3" />
+          <Property Name="modificationDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="dinearvningerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CREDENTIALS_API" EntityType="Self.CREDENTIALS_API" />
+          <EntitySet Name="SESSIONS_API" EntityType="dinearvningerModel.SESSIONS_API" />
+          <EntitySet Name="Testamenta_form_API" EntityType="dinearvningerModel.Testamenta_form_API" />
+          <AssociationSet Name="FK__Testament__sessi__3D5E1FD2" Association="dinearvningerModel.FK__Testament__sessi__3D5E1FD2">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SESSIONS_API">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="createdDateTime" Type="DateTime" Precision="3" />
+          <Property Name="modificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Testamenta_form_API" Relationship="dinearvningerModel.FK__Testament__sessi__3D5E1FD2" FromRole="SESSIONS_API" ToRole="Testamenta_form_API" />
+        </EntityType>
+        <EntityType Name="Testamenta_form_API">
+          <Key>
+            <PropertyRef Name="formId" />
+          </Key>
+          <Property Name="formId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="session_id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="hvordan_vil_du_oprette_testamentet" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="hvilket_testamente_onskes" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="civilstand" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="dit_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dit_aegtefaelles_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="har_du_tidligere_opretettet_testamente_selv" Type="Boolean" />
+          <Property Name="har_du_tidligere_opretettet_testamente_aegtefaelle" Type="Boolean" />
+          <Property Name="har_du_saereje_selv" Type="Boolean" />
+          <Property Name="har_du_saereje_aegtefaelle" Type="Boolean" />
+          <Property Name="createdDateTime" Type="DateTime" Precision="3" />
+          <Property Name="modificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SESSIONS_API" Relationship="dinearvningerModel.FK__Testament__sessi__3D5E1FD2" FromRole="Testamenta_form_API" ToRole="SESSIONS_API" />
+        </EntityType>
+        <Association Name="FK__Testament__sessi__3D5E1FD2">
+          <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
+          <End Type="dinearvningerModel.Testamenta_form_API" Role="Testamenta_form_API" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Testamenta_form_API">
+              <PropertyRef Name="session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dinearvningerModelStoreContainer" CdmEntityContainer="dinearvningerEntities">
+          <EntitySetMapping Name="CREDENTIALS_API">
+            <EntityTypeMapping TypeName="dinearvningerModel.CREDENTIALS_API">
+              <MappingFragment StoreEntitySet="CREDENTIALS_API">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="createdDateTime" ColumnName="createdDateTime" />
+                <ScalarProperty Name="modificationDateTime" ColumnName="modificationDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SESSIONS_API">
+            <EntityTypeMapping TypeName="dinearvningerModel.SESSIONS_API">
+              <MappingFragment StoreEntitySet="SESSIONS_API">
+                <ScalarProperty Name="modificationDateTime" ColumnName="modificationDateTime" />
+                <ScalarProperty Name="createdDateTime" ColumnName="createdDateTime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testamenta_form_API">
+            <EntityTypeMapping TypeName="dinearvningerModel.Testamenta_form_API">
+              <MappingFragment StoreEntitySet="Testamenta_form_API">
+                <ScalarProperty Name="modificationDateTime" ColumnName="modificationDateTime" />
+                <ScalarProperty Name="createdDateTime" ColumnName="createdDateTime" />
+                <ScalarProperty Name="har_du_saereje_aegtefaelle" ColumnName="har_du_saereje_aegtefaelle" />
+                <ScalarProperty Name="har_du_saereje_selv" ColumnName="har_du_saereje_selv" />
+                <ScalarProperty Name="har_du_tidligere_opretettet_testamente_aegtefaelle" ColumnName="har_du_tidligere_opretettet_testamente_aegtefaelle" />
+                <ScalarProperty Name="har_du_tidligere_opretettet_testamente_selv" ColumnName="har_du_tidligere_opretettet_testamente_selv" />
+                <ScalarProperty Name="dit_aegtefaelles_navn" ColumnName="dit_aegtefaelles_navn" />
+                <ScalarProperty Name="dit_navn" ColumnName="dit_navn" />
+                <ScalarProperty Name="civilstand" ColumnName="civilstand" />
+                <ScalarProperty Name="hvilket_testamente_onskes" ColumnName="hvilket_testamente_onskes" />
+                <ScalarProperty Name="hvordan_vil_du_oprette_testamentet" ColumnName="hvordan_vil_du_oprette_testamentet" />
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+                <ScalarProperty Name="formId" ColumnName="formId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
