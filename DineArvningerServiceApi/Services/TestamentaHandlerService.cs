@@ -21,7 +21,7 @@ namespace DineArvningerServiceApi.Services
 
         public void savePersonligInfo_step1(TestamentaStepEtSpgEt obj) {
 
-            testamenta_repo.savePersonligInfo_step1(obj.Hvordan_vil_du_oprette_testamentet, obj.Hvilket_testamente_onskes, obj.Civilstand, obj.Session_Id);
+            testamenta_repo.savePersonligInfo_step1(obj.Hvordan_vil_du_oprette_testamentet, obj.Hvilket_testamente_onskes, obj.Civilstand, obj.SessionId);
         }
 
         public void savePersonligInfo_step2(TestamentaStepEtSpgTo obj) {

@@ -13,6 +13,6 @@ namespace DBAccess.Model
 
         public string Civilstand { get; set; }
 
-        public string Session_Id { get; set; }
+        public string SessionId { get; set; }
     }
 }
