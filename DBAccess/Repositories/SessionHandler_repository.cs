@@ -34,5 +34,24 @@ namespace DBAccess.Repositories
             }
             //throw new NotImplementedException();
         }
+
+        public bool sessionExists(string sessionId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.SESSIONS_API.SingleOrDefault(x => x.session_id == sessionId).session_id;
+
+                if (!String.IsNullOrEmpty(result))
+                {
+                    return true;
+                }
+                else {
+
+                    return false;
+                }
+            }
+                //throw new NotImplementedException();
+                //var result = dbContext.Testamenta_form_API.SingleOrDefault(x => x.session_id == obj.SessionId);
+            }
     }
 }

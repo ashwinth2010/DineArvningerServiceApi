@@ -1,4 +1,5 @@
 ﻿using DBAccess.Model;
+using DineArvningerServiceApi.Models.Requests;
 using DineArvningerServiceApi.Services;
 using System;
 using System.Collections.Generic;
@@ -20,39 +21,49 @@ namespace DineArvningerServiceApi.Controllers
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepEt(TestamentaStepEtSpgEt obj) {
+        public void PostPersonligInfoStepEt(TestamentaPersonligSpgEtRequest req) {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step1(obj);
+            service.savePersonligInfo_step1(req);
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepTo(TestamentaStepEtSpgTo obj) {
+        public void PostPersonligInfoStepTo(TestamentaPersonligSpgToRequest req) {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step2(obj);
+            service.savePersonligInfo_step2(req);
 
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepTre(TestamentaStepEtSpgTre obj)
+        public void PostPersonligInfoStepTre(TestamentaPersonligSpgTreRequest req)
         {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step3(obj);
+            service.savePersonligInfo_step3(req);
 
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepFire(TestamentaStepEtSpgFire obj)
+        public void PostPersonligInfoStepFire(TestamentaPersonligSpgFireRequest req)
         {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step4(obj);
+            service.savePersonligInfo_step4(req);
+
+        }
+
+        [HttpPost]
+        public void PostPersonligInfoStepFem(TestamentaPersonligSpgFemRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            service.savePersonligInfo_step5(req);
 
         }
 

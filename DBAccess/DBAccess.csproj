@@ -53,18 +53,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adresse.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Arvinger.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="CREDENTIALS_API.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Arvinge.cs" />
+    <Compile Include="Model\ArvningFordeling.cs" />
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\TestamentaStepEtSpgEt.cs" />
+    <Compile Include="Model\TestamentaStepEtSpgFem.cs" />
     <Compile Include="Model\TestamentaStepEtSpgFire.cs" />
     <Compile Include="Model\TestamentaStepEtSpgTo.cs" />
     <Compile Include="Model\TestamentaStepEtSpgTre.cs" />
+    <Compile Include="Model\Organisation.cs" />
+    <Compile Include="Model\TestamentaStepToSpgEt.cs" />
+    <Compile Include="Model\TestamentaStepToSpgFire.cs" />
+    <Compile Include="Model\TestamentaStepToSpgTo.cs" />
+    <Compile Include="Model\TestamentaStepToSpgTre.cs" />
+    <Compile Include="Model\TestamentaStepTreSpgEt.cs" />
+    <Compile Include="Model\TestamentaStepTreSpgTo.cs" />
+    <Compile Include="Model\VedgoerendeOrganisationArvinge.cs" />
+    <Compile Include="Repositories\IOrganisationer_repository.cs" />
     <Compile Include="Repositories\ISessionHandler_repository.cs" />
     <Compile Include="Repositories\ITestamenta_repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Organisationer_repository.cs" />
     <Compile Include="Repositories\SessionHandler_repository.cs" />
     <Compile Include="Repositories\Testamenta_repository.cs" />
     <Compile Include="SESSIONS_API.cs">
@@ -85,7 +104,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TemplateFormModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="TestamentaOpretter.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Testamenta_form_API.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VedgoerendeOrganisation.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
