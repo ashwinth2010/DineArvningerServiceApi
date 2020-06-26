@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Repositories
 {
-    public interface ISessionHandler_repository
+    public interface IOrganisationer_repository
     {
-        string createSession(string country, string city, string status);
-
-        bool sessionExists(string sessionId);
+        List<Organisation> GetVedgoerendeOrganisationer();
     }
 }

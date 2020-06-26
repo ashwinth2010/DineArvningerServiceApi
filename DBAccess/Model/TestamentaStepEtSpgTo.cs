@@ -13,6 +13,10 @@ namespace DBAccess.Model
 
         public string Dit_navn { get; set; }
 
-        public string Dit_partner_navn { get; set; }
+        public string Din_aegtefaelles_navn { get; set; }
+
+        public string Din_samlevers_navn { get; set; }
+
+        public string Den_anden_persons_navn { get; set; }
     }
 }

@@ -27,6 +27,29 @@ namespace DBAccess
         public Nullable<bool> har_du_saereje_aegtefaelle { get; set; }
         public Nullable<System.DateTime> createdDateTime { get; set; }
         public Nullable<System.DateTime> modificationDateTime { get; set; }
+        public string Din_samlevers_navn { get; set; }
+        public string Den_anden_persons_navn { get; set; }
+        public Nullable<bool> Sidder_du_i_uskiftet_bo { get; set; }
+        public string Dit_Afdoede_aegtefaelles_navn { get; set; }
+        public string Partner_Afdoede_aegtefaelles_navn { get; set; }
+        public Nullable<bool> Vil_i_donere_arv_til_velgoerenhed { get; set; }
+        public Nullable<bool> Skal_arven_fordeles { get; set; }
+        public Nullable<bool> Uskiftet_bo_til_laengstlevende { get; set; }
+        public Nullable<bool> Skal_arvingerne_have_saereje_med_arven { get; set; }
+        public Nullable<bool> Vil_i_give_en_arving_fortrinsret { get; set; }
+        public Nullable<bool> Vil_baandlaegge_arv { get; set; }
+        public Nullable<bool> Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer { get; set; }
+        public string Arvingens_stedfortraeder_navn { get; set; }
+        public Nullable<bool> Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort { get; set; }
+        public string Navn_paa_vaergei { get; set; }
+        public string Jeres_relation_til_vaergen { get; set; }
+        public Nullable<int> Angiv_evt_ekstra_raadighedsbeloeb_pr_barn_pr_maaned { get; set; }
+        public string Begrundelse_og_oevrige_kommentarer { get; set; }
+        public Nullable<bool> Skal_boet_betale_for_vedligeholdelse_jeres_gravsted { get; set; }
+        public Nullable<bool> Vil_i_indsaette_en_bobestyrer { get; set; }
+        public string Kommentarer_til_bobestyrer { get; set; }
+        public Nullable<bool> Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet { get; set; }
+        public Nullable<bool> Sidder_din_partner_i_uskiftet_bo { get; set; }
     
         public virtual SESSIONS_API SESSIONS_API { get; set; }
     }
