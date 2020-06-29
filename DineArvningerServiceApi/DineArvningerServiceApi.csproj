@@ -176,9 +176,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MappingHelper\TestamentaMappingHelper.cs" />
     <Compile Include="Models\DomainModels\Arvinge.cs" />
+    <Compile Include="Models\DomainModels\ArvingeOrganisation.cs" />
     <Compile Include="Models\DomainModels\Organisation.cs" />
     <Compile Include="Models\DomainModels\TestamentOpretter.cs" />
+    <Compile Include="Models\Requests\TestamentaArvningSpgEtRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaBestemmelseSpgEtRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaBestemmelseSpgFireRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaBestemmelseSpgToRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaBestemmelseSpgTreRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaFordelingSpgToRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaArvningSpgToRequest.cs" />
+    <Compile Include="Models\Requests\TestamentaFordelingSpgEtRequest.cs" />
     <Compile Include="Models\Requests\TestamentaPersonligSpgEtRequest.cs" />
     <Compile Include="Models\Requests\TestamentaPersonligSpgFemRequest.cs" />
     <Compile Include="Models\Requests\TestamentaPersonligSpgFireRequest.cs" />

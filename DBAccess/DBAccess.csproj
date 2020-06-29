@@ -79,6 +79,9 @@
     <Compile Include="Model\TestamentaStepTreSpgEt.cs" />
     <Compile Include="Model\TestamentaStepTreSpgTo.cs" />
     <Compile Include="Model\VedgoerendeOrganisationArvinge.cs" />
+    <Compile Include="OrganisationArvinger.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\IOrganisationer_repository.cs" />
     <Compile Include="Repositories\ISessionHandler_repository.cs" />
     <Compile Include="Repositories\ITestamenta_repository.cs" />

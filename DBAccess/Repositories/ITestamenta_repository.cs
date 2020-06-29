@@ -31,5 +31,43 @@ namespace DBAccess.Repositories
 
         void UpdateTestamentaOpretter_step5(bool har_du_saereje_selv, string type, string sessionId);
 
+        void saveArvingeInfo_step1(List<Arvinger> ArvingerList, string sessionid);
+
+        void saveArvingeInfo_step2(bool Vil_i_donere_arv_til_velgoerenhed, string sessionid);
+
+        void saveArvingeInfo_step2_1(List<OrganisationArvinger> ArvingerList, string sessionid);
+
+        void saveArvingeFordelingInfo_step3(bool Skal_arven_fordeles, string sessionid);
+
+        void saveArvingeFordelingInfo_step4(List<Arvinger> ArvningFordelingList, string sessionid);
+
+        void saveArvingeFordelingInfo_step4_1(List<OrganisationArvinger> ArvningFordelingList, string sessionid);
+
+        void saveArvingeFordelingInfo_step4_2(TestamentaOpretter partnerTestamentaOprette, string sessionid);
+
+        void deleteArvninger(List<Arvinger> DeleteArvingerList, string sessionid);
+
+        void deleteOrganisationArvninger(List<OrganisationArvinger> DeleteArvingerList, string sessionid);
+
+        //Step 4
+
+        void saveBestemmelseInfo_step1(bool Skal_arvingerne_have_saereje_med_arven);
+
+        void saveBestemmelseInfo_step1_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment);
+
+        void saveBestemmelseInfo_step1_2(List<Arvinger> arvningList);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

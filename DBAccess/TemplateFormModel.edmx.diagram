@@ -9,12 +9,14 @@
         <EntityTypeShape EntityType="dinearvningerModel.SESSIONS_API" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="dinearvningerModel.Testamenta_form_API" Width="1.5" PointX="3" PointY="0.5" />
         <AssociationConnector Association="dinearvningerModel.FK__Testament__sessi__3D5E1FD2" />
-        <EntityTypeShape EntityType="dinearvningerModel.Adresse" Width="1.5" PointX="7.75" PointY="7.75" />
-        <EntityTypeShape EntityType="dinearvningerModel.Arvinger" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dinearvningerModel.Adresse" Width="1.5" PointX="8" PointY="3.5" />
         <EntityTypeShape EntityType="dinearvningerModel.VedgoerendeOrganisation" Width="1.5" PointX="5.75" PointY="4" />
-        <AssociationConnector Association="dinearvningerModel.FK_VedgoerendeOrganisationId1" />
         <EntityTypeShape EntityType="dinearvningerModel.TestamentaOpretter" Width="1.5" PointX="3" PointY="11.25" />
         <AssociationConnector Association="dinearvningerModel.FK_TestamentaOpretter_sessionId" />
+        <EntityTypeShape EntityType="dinearvningerModel.OrganisationArvinger" Width="1.5" PointX="3" PointY="16.5" />
+        <AssociationConnector Association="dinearvningerModel.FK_OrganisationArvinger_sessionId" />
+        <EntityTypeShape EntityType="dinearvningerModel.Arvinger" Width="1.5" PointX="3" PointY="21.5" />
+        <AssociationConnector Association="dinearvningerModel.FK_Arvinger_sessionId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

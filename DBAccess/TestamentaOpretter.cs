@@ -30,6 +30,8 @@ namespace DBAccess
         public bool Sidder_du_i_uskiftet_bo { get; set; }
         public string Dit_Afdoede_aegtefaelles_navn { get; set; }
         public bool har_du_saereje { get; set; }
+        public Nullable<decimal> FordelingiPct { get; set; }
+        public string Ejendele { get; set; }
     
         public virtual SESSIONS_API SESSIONS_API { get; set; }
     }

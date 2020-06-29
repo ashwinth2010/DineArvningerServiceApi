@@ -32,14 +32,8 @@
           <Property Name="Er_barnet_i_live" Type="bit" />
           <Property Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" Type="bit" />
           <Property Name="Uddyb_relation_til_arvingen" Type="varchar" MaxLength="50" />
-          <Property Name="ErActive" Type="bit" />
-          <Property Name="CreatedDateTime" Type="datetime" />
-          <Property Name="ModificationDateTime" Type="datetime" />
           <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
           <Property Name="Ejendele" Type="varchar" MaxLength="100" />
-          <Property Name="ArvingerType" Type="varchar" MaxLength="10" />
-          <Property Name="VedgoerendeOrganisationId" Type="int" />
-          <Property Name="ArvEllerLegater" Type="varchar" MaxLength="10" />
           <Property Name="Saerejeform" Type="varchar" MaxLength="30" />
           <Property Name="MaaSaerejetAendres" Type="bit" />
           <Property Name="Aendringsbetingelser" Type="varchar" MaxLength="200" />
@@ -48,7 +42,9 @@
           <Property Name="BaandlaeggeArv" Type="bit" />
           <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="varchar" MaxLength="200" />
           <Property Name="Arvingens_stedfortraeder" Type="varchar" MaxLength="40" />
-          <Property Name="Har_du_tidligere_oprettet_testamenta" Type="bit" />
+          <Property Name="ErActive" Type="bit" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="CREDENTIALS_API">
           <Key>
@@ -60,6 +56,24 @@
           <Property Name="role" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="createdDateTime" Type="datetime" />
           <Property Name="modificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrganisationArvinger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Session_id" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="OrganisationId" Type="int" Nullable="false" />
+          <Property Name="ArvEllerLegatar" Type="varchar" MaxLength="20" />
+          <Property Name="Fortrinsret" Type="bit" />
+          <Property Name="Genstande" Type="varchar" MaxLength="200" />
+          <Property Name="BaandlaeggeArv" Type="bit" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="varchar" MaxLength="200" />
+          <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="varchar" MaxLength="100" />
+          <Property Name="ErActive" Type="bit" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="SESSIONS_API">
           <Key>
@@ -133,6 +147,8 @@
           <Property Name="Sidder_du_i_uskiftet_bo" Type="bit" Nullable="false" />
           <Property Name="Dit_Afdoede_aegtefaelles_navn" Type="varchar" MaxLength="50" />
           <Property Name="har_du_saereje" Type="bit" Nullable="false" />
+          <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="VedgoerendeOrganisation">
           <Key>
@@ -161,6 +177,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Arvinger_sessionId">
+          <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
+          <End Role="Arvinger" Type="Self.Arvinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Arvinger">
+              <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganisationArvinger_sessionId">
+          <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
+          <End Role="OrganisationArvinger" Type="Self.OrganisationArvinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="OrganisationArvinger">
+              <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TestamentaOpretter_sessionId">
           <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
           <End Role="TestamentaOpretter" Type="Self.TestamentaOpretter" Multiplicity="*" />
@@ -173,22 +213,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VedgoerendeOrganisationId">
-          <End Role="VedgoerendeOrganisation" Type="Self.VedgoerendeOrganisation" Multiplicity="0..1" />
-          <End Role="Arvinger" Type="Self.Arvinger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VedgoerendeOrganisation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Arvinger">
-              <PropertyRef Name="VedgoerendeOrganisationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="dinearvningerModelStoreContainer">
           <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Arvinger" EntityType="Self.Arvinger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CREDENTIALS_API" EntityType="Self.CREDENTIALS_API" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganisationArvinger" EntityType="Self.OrganisationArvinger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESSIONS_API" EntityType="Self.SESSIONS_API" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Testamenta_form_API" EntityType="Self.Testamenta_form_API" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestamentaOpretter" EntityType="Self.TestamentaOpretter" Schema="dbo" store:Type="Tables" />
@@ -197,13 +226,17 @@
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
           </AssociationSet>
+          <AssociationSet Name="FK_Arvinger_sessionId" Association="Self.FK_Arvinger_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Arvinger" EntitySet="Arvinger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganisationArvinger_sessionId" Association="Self.FK_OrganisationArvinger_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="OrganisationArvinger" EntitySet="OrganisationArvinger" />
+          </AssociationSet>
           <AssociationSet Name="FK_TestamentaOpretter_sessionId" Association="Self.FK_TestamentaOpretter_sessionId">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="TestamentaOpretter" EntitySet="TestamentaOpretter" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VedgoerendeOrganisationId" Association="Self.FK_VedgoerendeOrganisationId">
-            <End Role="VedgoerendeOrganisation" EntitySet="VedgoerendeOrganisation" />
-            <End Role="Arvinger" EntitySet="Arvinger" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -230,16 +263,21 @@
             <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
           </AssociationSet>
           <EntitySet Name="Adresse" EntityType="dinearvningerModel.Adresse" />
-          <EntitySet Name="Arvinger" EntityType="dinearvningerModel.Arvinger" />
           <EntitySet Name="VedgoerendeOrganisation" EntityType="dinearvningerModel.VedgoerendeOrganisation" />
-          <AssociationSet Name="FK_VedgoerendeOrganisationId1" Association="dinearvningerModel.FK_VedgoerendeOrganisationId1">
-            <End Role="VedgoerendeOrganisation" EntitySet="VedgoerendeOrganisation" />
-            <End Role="Arvinger" EntitySet="Arvinger" />
-          </AssociationSet>
           <EntitySet Name="TestamentaOpretter" EntityType="dinearvningerModel.TestamentaOpretter" />
           <AssociationSet Name="FK_TestamentaOpretter_sessionId" Association="dinearvningerModel.FK_TestamentaOpretter_sessionId">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="TestamentaOpretter" EntitySet="TestamentaOpretter" />
+          </AssociationSet>
+          <EntitySet Name="OrganisationArvinger" EntityType="dinearvningerModel.OrganisationArvinger" />
+          <AssociationSet Name="FK_OrganisationArvinger_sessionId" Association="dinearvningerModel.FK_OrganisationArvinger_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="OrganisationArvinger" EntitySet="OrganisationArvinger" />
+          </AssociationSet>
+          <EntitySet Name="Arvinger" EntityType="dinearvningerModel.Arvinger" />
+          <AssociationSet Name="FK_Arvinger_sessionId" Association="dinearvningerModel.FK_Arvinger_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Arvinger" EntitySet="Arvinger" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SESSIONS_API">
@@ -254,6 +292,8 @@
           <Property Name="modificationDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Testamenta_form_API" Relationship="dinearvningerModel.FK__Testament__sessi__3D5E1FD2" FromRole="SESSIONS_API" ToRole="Testamenta_form_API" />
           <NavigationProperty Name="TestamentaOpretter" Relationship="dinearvningerModel.FK_TestamentaOpretter_sessionId" FromRole="SESSIONS_API" ToRole="TestamentaOpretter" />
+          <NavigationProperty Name="OrganisationArvinger" Relationship="dinearvningerModel.FK_OrganisationArvinger_sessionId" FromRole="SESSIONS_API" ToRole="OrganisationArvinger" />
+          <NavigationProperty Name="Arvinger" Relationship="dinearvningerModel.FK_Arvinger_sessionId" FromRole="SESSIONS_API" ToRole="Arvinger" />
         </EntityType>
         <EntityType Name="Testamenta_form_API">
           <Key>
@@ -324,37 +364,6 @@
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Arvinger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Session_id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Arvingen_navn" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Foedselsdato" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RelationTilArvingen" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Er_barnet_i_live" Type="Boolean" />
-          <Property Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" Type="Boolean" />
-          <Property Name="Uddyb_relation_til_arvingen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ErActive" Type="Boolean" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
-          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
-          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ArvingerType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="VedgoerendeOrganisationId" Type="Int32" />
-          <Property Name="ArvEllerLegater" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="VedgoerendeOrganisation" Relationship="dinearvningerModel.FK_VedgoerendeOrganisationId1" FromRole="Arvinger" ToRole="VedgoerendeOrganisation" />
-          <Property Name="Saerejeform" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="MaaSaerejetAendres" Type="Boolean" />
-          <Property Name="Aendringsbetingelser" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Fortrinsret" Type="Boolean" />
-          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BaandlaeggeArv" Type="Boolean" />
-          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Arvingens_stedfortraeder" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Har_du_tidligere_oprettet_testamenta" Type="Boolean" />
-        </EntityType>
         <EntityType Name="VedgoerendeOrganisation">
           <Key>
             <PropertyRef Name="Id" />
@@ -369,20 +378,7 @@
           <Property Name="ErAktiv" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Arvinger" Relationship="dinearvningerModel.FK_VedgoerendeOrganisationId1" FromRole="VedgoerendeOrganisation" ToRole="Arvinger" />
         </EntityType>
-        <Association Name="FK_VedgoerendeOrganisationId1">
-          <End Type="dinearvningerModel.VedgoerendeOrganisation" Role="VedgoerendeOrganisation" Multiplicity="0..1" />
-          <End Type="dinearvningerModel.Arvinger" Role="Arvinger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VedgoerendeOrganisation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Arvinger">
-              <PropertyRef Name="VedgoerendeOrganisationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TestamentaOpretter">
           <Key>
             <PropertyRef Name="Id" />
@@ -404,6 +400,8 @@
           <Property Name="Sidder_du_i_uskiftet_bo" Type="Boolean" Nullable="false" />
           <Property Name="Dit_Afdoede_aegtefaelles_navn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="har_du_saereje" Type="Boolean" Nullable="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_TestamentaOpretter_sessionId">
           <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
@@ -414,6 +412,76 @@
             </Principal>
             <Dependent Role="TestamentaOpretter">
               <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrganisationArvinger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Session_id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="OrganisationId" Type="Int32" Nullable="false" />
+          <Property Name="ArvEllerLegatar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fortrinsret" Type="Boolean" />
+          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BaandlaeggeArv" Type="Boolean" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ErActive" Type="Boolean" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SESSIONS_API" Relationship="dinearvningerModel.FK_OrganisationArvinger_sessionId" FromRole="OrganisationArvinger" ToRole="SESSIONS_API" />
+        </EntityType>
+        <Association Name="FK_OrganisationArvinger_sessionId">
+          <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
+          <End Type="dinearvningerModel.OrganisationArvinger" Role="OrganisationArvinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="OrganisationArvinger">
+              <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Arvinger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Session_id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Arvingen_navn" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Foedselsdato" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RelationTilArvingen" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Er_barnet_i_live" Type="Boolean" />
+          <Property Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" Type="Boolean" />
+          <Property Name="Uddyb_relation_til_arvingen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Saerejeform" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MaaSaerejetAendres" Type="Boolean" />
+          <Property Name="Aendringsbetingelser" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fortrinsret" Type="Boolean" />
+          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BaandlaeggeArv" Type="Boolean" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Arvingens_stedfortraeder" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ErActive" Type="Boolean" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SESSIONS_API" Relationship="dinearvningerModel.FK_Arvinger_sessionId" FromRole="Arvinger" ToRole="SESSIONS_API" />
+        </EntityType>
+        <Association Name="FK_Arvinger_sessionId">
+          <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
+          <End Type="dinearvningerModel.Arvinger" Role="Arvinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Arvinger">
+              <PropertyRef Name="Session_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -505,37 +573,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Arvinger">
-            <EntityTypeMapping TypeName="dinearvningerModel.Arvinger">
-              <MappingFragment StoreEntitySet="Arvinger">
-                <ScalarProperty Name="Har_du_tidligere_oprettet_testamenta" ColumnName="Har_du_tidligere_oprettet_testamenta" />
-                <ScalarProperty Name="Arvingens_stedfortraeder" ColumnName="Arvingens_stedfortraeder" />
-                <ScalarProperty Name="Hvornaar_skal_baandlaeggelsen_ophoere" ColumnName="Hvornaar_skal_baandlaeggelsen_ophoere" />
-                <ScalarProperty Name="BaandlaeggeArv" ColumnName="BaandlaeggeArv" />
-                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
-                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
-                <ScalarProperty Name="Aendringsbetingelser" ColumnName="Aendringsbetingelser" />
-                <ScalarProperty Name="MaaSaerejetAendres" ColumnName="MaaSaerejetAendres" />
-                <ScalarProperty Name="Saerejeform" ColumnName="Saerejeform" />
-                <ScalarProperty Name="ArvEllerLegater" ColumnName="ArvEllerLegater" />
-                <ScalarProperty Name="VedgoerendeOrganisationId" ColumnName="VedgoerendeOrganisationId" />
-                <ScalarProperty Name="ArvingerType" ColumnName="ArvingerType" />
-                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
-                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
-                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="ErActive" ColumnName="ErActive" />
-                <ScalarProperty Name="Uddyb_relation_til_arvingen" ColumnName="Uddyb_relation_til_arvingen" />
-                <ScalarProperty Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" ColumnName="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" />
-                <ScalarProperty Name="Er_barnet_i_live" ColumnName="Er_barnet_i_live" />
-                <ScalarProperty Name="RelationTilArvingen" ColumnName="RelationTilArvingen" />
-                <ScalarProperty Name="Foedselsdato" ColumnName="Foedselsdato" />
-                <ScalarProperty Name="Arvingen_navn" ColumnName="Arvingen_navn" />
-                <ScalarProperty Name="Session_id" ColumnName="Session_id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VedgoerendeOrganisation">
             <EntityTypeMapping TypeName="dinearvningerModel.VedgoerendeOrganisation">
               <MappingFragment StoreEntitySet="VedgoerendeOrganisation">
@@ -555,6 +592,8 @@
           <EntitySetMapping Name="TestamentaOpretter">
             <EntityTypeMapping TypeName="dinearvningerModel.TestamentaOpretter">
               <MappingFragment StoreEntitySet="TestamentaOpretter">
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
                 <ScalarProperty Name="har_du_saereje" ColumnName="har_du_saereje" />
                 <ScalarProperty Name="Dit_Afdoede_aegtefaelles_navn" ColumnName="Dit_Afdoede_aegtefaelles_navn" />
                 <ScalarProperty Name="Sidder_du_i_uskiftet_bo" ColumnName="Sidder_du_i_uskiftet_bo" />
@@ -570,6 +609,52 @@
                 <ScalarProperty Name="Saerejeform" ColumnName="Saerejeform" />
                 <ScalarProperty Name="har_du_tidligere_opretettet_testamente_selv" ColumnName="har_du_tidligere_opretettet_testamente_selv" />
                 <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganisationArvinger">
+            <EntityTypeMapping TypeName="dinearvningerModel.OrganisationArvinger">
+              <MappingFragment StoreEntitySet="OrganisationArvinger">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ErActive" ColumnName="ErActive" />
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
+                <ScalarProperty Name="Hvornaar_skal_baandlaeggelsen_ophoere" ColumnName="Hvornaar_skal_baandlaeggelsen_ophoere" />
+                <ScalarProperty Name="BaandlaeggeArv" ColumnName="BaandlaeggeArv" />
+                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
+                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
+                <ScalarProperty Name="ArvEllerLegatar" ColumnName="ArvEllerLegatar" />
+                <ScalarProperty Name="OrganisationId" ColumnName="OrganisationId" />
+                <ScalarProperty Name="Session_id" ColumnName="Session_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arvinger">
+            <EntityTypeMapping TypeName="dinearvningerModel.Arvinger">
+              <MappingFragment StoreEntitySet="Arvinger">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ErActive" ColumnName="ErActive" />
+                <ScalarProperty Name="Arvingens_stedfortraeder" ColumnName="Arvingens_stedfortraeder" />
+                <ScalarProperty Name="Hvornaar_skal_baandlaeggelsen_ophoere" ColumnName="Hvornaar_skal_baandlaeggelsen_ophoere" />
+                <ScalarProperty Name="BaandlaeggeArv" ColumnName="BaandlaeggeArv" />
+                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
+                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
+                <ScalarProperty Name="Aendringsbetingelser" ColumnName="Aendringsbetingelser" />
+                <ScalarProperty Name="MaaSaerejetAendres" ColumnName="MaaSaerejetAendres" />
+                <ScalarProperty Name="Saerejeform" ColumnName="Saerejeform" />
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
+                <ScalarProperty Name="Uddyb_relation_til_arvingen" ColumnName="Uddyb_relation_til_arvingen" />
+                <ScalarProperty Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" ColumnName="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" />
+                <ScalarProperty Name="Er_barnet_i_live" ColumnName="Er_barnet_i_live" />
+                <ScalarProperty Name="RelationTilArvingen" ColumnName="RelationTilArvingen" />
+                <ScalarProperty Name="Foedselsdato" ColumnName="Foedselsdato" />
+                <ScalarProperty Name="Arvingen_navn" ColumnName="Arvingen_navn" />
+                <ScalarProperty Name="Session_id" ColumnName="Session_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

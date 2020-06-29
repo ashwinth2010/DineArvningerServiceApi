@@ -22,14 +22,8 @@ namespace DBAccess
         public Nullable<bool> Er_barnet_i_live { get; set; }
         public Nullable<bool> Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet { get; set; }
         public string Uddyb_relation_til_arvingen { get; set; }
-        public Nullable<bool> ErActive { get; set; }
-        public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public Nullable<System.DateTime> ModificationDateTime { get; set; }
         public Nullable<decimal> FordelingiPct { get; set; }
         public string Ejendele { get; set; }
-        public string ArvingerType { get; set; }
-        public Nullable<int> VedgoerendeOrganisationId { get; set; }
-        public string ArvEllerLegater { get; set; }
         public string Saerejeform { get; set; }
         public Nullable<bool> MaaSaerejetAendres { get; set; }
         public string Aendringsbetingelser { get; set; }
@@ -38,8 +32,10 @@ namespace DBAccess
         public Nullable<bool> BaandlaeggeArv { get; set; }
         public string Hvornaar_skal_baandlaeggelsen_ophoere { get; set; }
         public string Arvingens_stedfortraeder { get; set; }
-        public Nullable<bool> Har_du_tidligere_oprettet_testamenta { get; set; }
+        public Nullable<bool> ErActive { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.DateTime> ModificationDateTime { get; set; }
     
-        public virtual VedgoerendeOrganisation VedgoerendeOrganisation { get; set; }
+        public virtual SESSIONS_API SESSIONS_API { get; set; }
     }
 }
