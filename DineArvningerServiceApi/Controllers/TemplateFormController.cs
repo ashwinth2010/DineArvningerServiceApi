@@ -21,51 +21,106 @@ namespace DineArvningerServiceApi.Controllers
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepEt(TestamentaPersonligSpgEtRequest req) {
+        public string PostPersonligInfoStepEt(TestamentaPersonligSpgEtRequest req) {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step1(req);
+            string sessionId = service.savePersonligInfo_step1(req);
+
+            return sessionId;
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepTo(TestamentaPersonligSpgToRequest req) {
+        public string PostPersonligInfoStepTo(TestamentaPersonligSpgToRequest req) {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step2(req);
+            string sessionId = service.savePersonligInfo_step2(req);
+
+            return sessionId;
 
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepTre(TestamentaPersonligSpgTreRequest req)
+        public string PostPersonligInfoStepTre(TestamentaPersonligSpgTreRequest req)
         {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step3(req);
+            string sessionId = service.savePersonligInfo_step3(req);
+
+            return sessionId;
 
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepFire(TestamentaPersonligSpgFireRequest req)
+        public string PostPersonligInfoStepFire(TestamentaPersonligSpgFireRequest req)
         {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step4(req);
+            string sessionId = service.savePersonligInfo_step4(req);
+
+            return sessionId;
 
         }
 
         [HttpPost]
-        public void PostPersonligInfoStepFem(TestamentaPersonligSpgFemRequest req)
+        public string PostPersonligInfoStepFem(TestamentaPersonligSpgFemRequest req)
         {
 
             TestamentaHandlerService service = new TestamentaHandlerService();
 
-            service.savePersonligInfo_step5(req);
+            string sessionId = service.savePersonligInfo_step5(req);
+
+            return sessionId;
 
         }
+
+        [HttpPost]
+        public string PostArvingInfoStepEt(TestamentaArvningSpgEtRequest req) {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveArvningInfo_step1(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostArvingInfoStepTo(TestamentaArvningSpgToRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveArvningInfo_step2(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostArvingInfoStepTre(TestamentaFordelingSpgEtRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveArvningFordelingInfo_step3(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostArvingInfoStepFire(TestamentaFordelingSpgToRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveArvningFordelingInfo_step4(req);
+
+            return sessionId;
+        }
+
+
 
 
 

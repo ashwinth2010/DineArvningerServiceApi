@@ -10,7 +10,6 @@ namespace DineArvningerServiceApi.Models.DomainModels
 
         public string Navn { get; set; }
         public string Type { get; set; }
-        public bool har_du_tidligere_opretettet_testamente_selv { get; set; }
         public string Saerejeform { get; set; }
         public bool MaaSaerejetAendres { get; set; }
         public string Aendringsbetingelser { get; set; }

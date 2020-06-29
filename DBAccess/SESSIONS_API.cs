@@ -19,6 +19,8 @@ namespace DBAccess
         {
             this.Testamenta_form_API = new HashSet<Testamenta_form_API>();
             this.TestamentaOpretter = new HashSet<TestamentaOpretter>();
+            this.OrganisationArvinger = new HashSet<OrganisationArvinger>();
+            this.Arvinger = new HashSet<Arvinger>();
         }
     
         public string session_id { get; set; }
@@ -32,5 +34,9 @@ namespace DBAccess
         public virtual ICollection<Testamenta_form_API> Testamenta_form_API { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestamentaOpretter> TestamentaOpretter { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrganisationArvinger> OrganisationArvinger { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Arvinger> Arvinger { get; set; }
     }
 }

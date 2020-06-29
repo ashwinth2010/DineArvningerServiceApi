@@ -29,8 +29,9 @@ namespace DBAccess
         public virtual DbSet<SESSIONS_API> SESSIONS_API { get; set; }
         public virtual DbSet<Testamenta_form_API> Testamenta_form_API { get; set; }
         public virtual DbSet<Adresse> Adresse { get; set; }
-        public virtual DbSet<Arvinger> Arvinger { get; set; }
         public virtual DbSet<VedgoerendeOrganisation> VedgoerendeOrganisation { get; set; }
         public virtual DbSet<TestamentaOpretter> TestamentaOpretter { get; set; }
+        public virtual DbSet<OrganisationArvinger> OrganisationArvinger { get; set; }
+        public virtual DbSet<Arvinger> Arvinger { get; set; }
     }
 }

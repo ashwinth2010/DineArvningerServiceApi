@@ -12,17 +12,22 @@ namespace DBAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class VedgoerendeOrganisation
+    public partial class OrganisationArvinger
     {
         public int Id { get; set; }
-        public string Navn { get; set; }
-        public int CVR { get; set; }
-        public string Address { get; set; }
-        public int PostNummer { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public bool ErAktiv { get; set; }
+        public string Session_id { get; set; }
+        public int OrganisationId { get; set; }
+        public string ArvEllerLegatar { get; set; }
+        public Nullable<bool> Fortrinsret { get; set; }
+        public string Genstande { get; set; }
+        public Nullable<bool> BaandlaeggeArv { get; set; }
+        public string Hvornaar_skal_baandlaeggelsen_ophoere { get; set; }
+        public Nullable<decimal> FordelingiPct { get; set; }
+        public string Ejendele { get; set; }
+        public Nullable<bool> ErActive { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.DateTime> ModificationDateTime { get; set; }
+    
+        public virtual SESSIONS_API SESSIONS_API { get; set; }
     }
 }
