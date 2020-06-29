@@ -9,7 +9,7 @@ namespace DBAccess.Model
     public class Organisation
     {
 
-        public int Id { get;}
+        public int Id { get; set; }
 		public string Navn { get; set; }
 
 		public int CVR { get; set; }

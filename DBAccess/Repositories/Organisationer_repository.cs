@@ -22,7 +22,8 @@ namespace DBAccess.Repositories
                     Country = x.Country,
                     CVR = x.CVR,
                     PostNummer = x.PostNummer,
-                    ErActive = x.ErAktiv
+                    ErActive = x.ErAktiv,
+                    Id = x.Id
 
                 }).ToList();
 
