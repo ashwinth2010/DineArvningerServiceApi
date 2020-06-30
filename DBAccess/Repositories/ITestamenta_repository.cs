@@ -51,11 +51,29 @@ namespace DBAccess.Repositories
 
         //Step 4
 
-        void saveBestemmelseInfo_step1(bool Skal_arvingerne_have_saereje_med_arven);
+        void saveBestemmelseInfo_step1(bool Skal_arvingerne_have_saereje_med_arven, string sessionid);
 
-        void saveBestemmelseInfo_step1_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment);
+        void saveBestemmelseInfo_step1_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment, string sessionid);
 
-        void saveBestemmelseInfo_step1_2(List<Arvinger> arvningList);
+        void saveBestemmelseInfo_step1_2(List<Arvinger> arvningList, string sessionid);
+
+        void saveBestemmelseInfo_step2(bool Vil_i_give_en_arving_fortrinsret, string sessionid);
+
+        void saveBestemmelseInfo_step2_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment, string sessionid);
+
+        void saveBestemmelseInfo_step2_2(List<Arvinger> arvningList, string sessionid);
+
+        void saveBestemmelseInfo_step3(bool Vil_baandlaegge_arv, string sessionid);
+
+        void saveBestemmelseInfo_step3_1(List<Arvinger> arvningList, string sessionid);
+
+        void saveBestemmelseInfo_step3_2(List<OrganisationArvinger> OrgArvningList, string sessionid);
+
+        void saveBestemmelseInfo_step4(bool Skal_arvingens_boern_arve_hvis_arvingen_er_gaaet_bort_foer_Jer , string sessionid);
+
+        void saveBestemmelseInfo_step4_1(List<Arvinger> arvningList, string sessionid);
+
+
 
 
 

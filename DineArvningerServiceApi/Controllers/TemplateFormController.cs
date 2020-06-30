@@ -120,6 +120,50 @@ namespace DineArvningerServiceApi.Controllers
             return sessionId;
         }
 
+        [HttpPost]
+        public string PostBestemmelserInfoStepEt(TestamentaBestemmelseSpgEtRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveBestemmelseInfo_step1(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostBestemmelserInfoStepTo(TestamentaBestemmelseSpgToRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveBestemmelseInfo_step2(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostBestemmelserInfoStepTre(TestamentaBestemmelseSpgTreRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveBestemmelseInfo_step3(req);
+
+            return sessionId;
+        }
+
+        [HttpPost]
+        public string PostBestemmelserInfoStepFire(TestamentaBestemmelseSpgFireRequest req)
+        {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            string sessionId = service.saveBestemmelseInfo_step4(req);
+
+            return sessionId;
+        }
+
 
 
 
