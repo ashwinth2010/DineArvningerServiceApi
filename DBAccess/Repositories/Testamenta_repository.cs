@@ -380,19 +380,221 @@ namespace DBAccess.Repositories
             }
         }
 
-        public void saveBestemmelseInfo_step1(bool Skal_arvingerne_have_saereje_med_arven)
+
+        public void saveBestemmelseInfo_step1(bool Skal_arvingerne_have_saereje_med_arven, string sessionid)
         {
-            throw new NotImplementedException();
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.Testamenta_form_API.SingleOrDefault(x => x.session_id == sessionid);
+
+                if (result != null)
+                {
+                    result.Skal_arvingerne_have_saereje_med_arven = Skal_arvingerne_have_saereje_med_arven;
+
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
         }
 
-        public void saveBestemmelseInfo_step1_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment)
+        public void saveBestemmelseInfo_step1_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment, string sessionid)
         {
-            throw new NotImplementedException();
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.TestamentaOpretter.SingleOrDefault(x => x.SessionId == sessionid && x.Type == "Primary");
+
+                if (result != null)
+                {
+                    result.Saerejeform = egnTestament.Saerejeform;
+                    result.MaaSaerejetAendres = egnTestament.MaaSaerejetAendres;
+                    result.Aendringsbetingelser = egnTestament.Aendringsbetingelser;
+                }
+
+                if (PartnerTestment != null) {
+
+                    var resultPartner = dbContext.TestamentaOpretter.SingleOrDefault(x => x.SessionId == sessionid && x.Type != "Primary");
+
+                    if (resultPartner != null) {
+
+                        resultPartner.Saerejeform = PartnerTestment.Saerejeform;
+                        resultPartner.MaaSaerejetAendres = PartnerTestment.MaaSaerejetAendres;
+                        resultPartner.Aendringsbetingelser = PartnerTestment.Aendringsbetingelser;
+                    }
+                }
+                dbContext.SaveChanges();
+            }
+            //throw new NotImplementedException();
         }
 
-        public void saveBestemmelseInfo_step1_2(List<Arvinger> arvningList)
+        public void saveBestemmelseInfo_step1_2(List<Arvinger> arvningList, string sessionid)
         {
-            throw new NotImplementedException();
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                foreach (var arving in arvningList)
+                {
+                    var result = dbContext.Arvinger.SingleOrDefault(x => x.Session_id == sessionid && x.Arvingen_navn == arving.Arvingen_navn);
+
+                    if (result != null)
+                    {
+                        result.Saerejeform = arving.Saerejeform;
+                        result.MaaSaerejetAendres = arving.MaaSaerejetAendres;
+                        result.Aendringsbetingelser = arving.Aendringsbetingelser;
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step2(bool Vil_i_give_en_arving_fortrinsret, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.Testamenta_form_API.SingleOrDefault(x => x.session_id == sessionid);
+
+                if (result != null)
+                {
+                    result.Vil_i_give_en_arving_fortrinsret = Vil_i_give_en_arving_fortrinsret;
+
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step2_1(TestamentaOpretter egnTestament, TestamentaOpretter PartnerTestment, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.TestamentaOpretter.SingleOrDefault(x => x.SessionId == sessionid && x.Type == "Primary");
+
+                if (result != null)
+                {
+                    result.Fortrinsret = egnTestament.Fortrinsret;
+                    result.Genstande = egnTestament.Genstande;
+                }
+
+                if (PartnerTestment != null)
+                {
+
+                    var resultPartner = dbContext.TestamentaOpretter.SingleOrDefault(x => x.SessionId == sessionid && x.Type != "Primary");
+
+                    if (resultPartner != null)
+                    {
+                        resultPartner.Fortrinsret = PartnerTestment.Fortrinsret;
+                        resultPartner.Genstande = PartnerTestment.Genstande;
+                    }
+                }
+                dbContext.SaveChanges();
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step2_2(List<Arvinger> arvningList, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                foreach (var arving in arvningList)
+                {
+                    var result = dbContext.Arvinger.SingleOrDefault(x => x.Session_id == sessionid && x.Arvingen_navn == arving.Arvingen_navn);
+
+                    if (result != null)
+                    {
+                        result.Fortrinsret = arving.Fortrinsret;
+                        result.Genstande = arving.Genstande;
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step3(bool Vil_baandlaegge_arv, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.Testamenta_form_API.SingleOrDefault(x => x.session_id == sessionid);
+
+                if (result != null)
+                {
+                    result.Vil_baandlaegge_arv = Vil_baandlaegge_arv;
+
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step3_1(List<Arvinger> arvningList, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                foreach (var arving in arvningList)
+                {
+                    var result = dbContext.Arvinger.SingleOrDefault(x => x.Session_id == sessionid && x.Arvingen_navn == arving.Arvingen_navn);
+
+                    if (result != null)
+                    {
+                        result.BaandlaeggeArv = arving.BaandlaeggeArv;
+                        result.Hvornaar_skal_baandlaeggelsen_ophoere = arving.Hvornaar_skal_baandlaeggelsen_ophoere;
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step3_2(List<OrganisationArvinger> OrgArvningList, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                foreach (var arving in OrgArvningList)
+                {
+                    var result = dbContext.OrganisationArvinger.SingleOrDefault(x => x.Session_id == sessionid && x.OrganisationId == arving.OrganisationId);
+
+                    if (result != null)
+                    {
+                        result.BaandlaeggeArv = arving.BaandlaeggeArv;
+                        result.Hvornaar_skal_baandlaeggelsen_ophoere = arving.Hvornaar_skal_baandlaeggelsen_ophoere;
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step4(bool Skal_arvingens_boern_arve_hvis_arvingen_er_gaaet_bort_foer_Jer, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                var result = dbContext.Testamenta_form_API.SingleOrDefault(x => x.session_id == sessionid);
+
+                if (result != null)
+                {
+                    result.Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer = Skal_arvingens_boern_arve_hvis_arvingen_er_gaaet_bort_foer_Jer;
+
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
+        }
+
+        public void saveBestemmelseInfo_step4_1(List<Arvinger> arvningList, string sessionid)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                foreach (var arving in arvningList)
+                {
+                    var result = dbContext.Arvinger.SingleOrDefault(x => x.Session_id == sessionid && x.Arvingen_navn == arving.Arvingen_navn);
+
+                    if (result != null)
+                    {
+                        result.Arvingens_stedfortraeder = arving.Arvingens_stedfortraeder;
+                    }
+                    dbContext.SaveChanges();
+                }
+            }
+            //throw new NotImplementedException();
         }
     }
 }

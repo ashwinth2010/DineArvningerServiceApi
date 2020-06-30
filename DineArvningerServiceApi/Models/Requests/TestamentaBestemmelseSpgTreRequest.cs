@@ -9,6 +9,7 @@ namespace DineArvningerServiceApi.Models.Requests
     public class TestamentaBestemmelseSpgTreRequest
     {
 
+        public bool Vil_baandlaegge_arv { get; set; }
         public List<Arvinge> ArvingerList { get; set; }
 
         public List<ArvingeOrganisation> VedgoerendeOrganisationArvingeList { get; set; }
