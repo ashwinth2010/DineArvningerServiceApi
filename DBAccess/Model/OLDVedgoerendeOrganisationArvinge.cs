@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class VedgoerendeOrganisationArvinge
+    public class OLDVedgoerendeOrganisationArvinge
     {
 
 		public int VedgoerendeOrganisationId { get; set; }

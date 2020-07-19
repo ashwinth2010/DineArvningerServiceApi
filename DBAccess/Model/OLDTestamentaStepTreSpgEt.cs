@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class TestamentaStepToSpgTre
+    public class OLDTestamentaStepTreSpgEt
     {
 
-        public bool Skal_arven_fordeles { get; set; }
-
-
+        public bool Uskiftet_bo_til_laengstlevende { get; set; }
     }
 }

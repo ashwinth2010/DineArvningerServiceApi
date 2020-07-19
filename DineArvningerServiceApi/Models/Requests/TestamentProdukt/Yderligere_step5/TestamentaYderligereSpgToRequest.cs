@@ -6,12 +6,9 @@ using System.Web;
 
 namespace DineArvningerServiceApi.Models.Requests
 {
-    public class TestamentaBestemmelseSpgFireRequest
+    public class TestamentaYderligereSpgToRequest
     {
-
-        public bool Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_Jer { get; set; }
-
-        public List<Arvinge> ArvingerList { get; set; }
+        public TestamentOpretter partnerTestament { get; set; }
 
         public string SessionId { get; set; }
     }

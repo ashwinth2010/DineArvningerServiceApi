@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class Arvinge
+    public class ArvingeOLD
     {
 
         public int sessionId { get; set; }

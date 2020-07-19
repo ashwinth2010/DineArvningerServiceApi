@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class ArvningFordeling
+    public class OLDTestamentaStepToSpgEt
     {
-        public decimal ArvningId { get; set; }
-
-        public string Ejendele { get; set; }
+        //public List<Arvinge> GetArvingerList { get; set; }
     }
 }

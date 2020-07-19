@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class TestamentaStepTreSpgEt
+    public class OLDTestamentaStepEtSpgFem
     {
+        public string SessionId { get; set; }
 
-        public bool Uskiftet_bo_til_laengstlevende { get; set; }
+ 
     }
 }

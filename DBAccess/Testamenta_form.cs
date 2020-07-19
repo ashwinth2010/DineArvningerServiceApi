@@ -12,56 +12,52 @@ namespace DBAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Testamenta_form_API
+    public partial class Testamenta_form
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Testamenta_form_API()
+        public Testamenta_form()
         {
+            this.Arvning = new HashSet<Arvning>();
+            this.OrganisationArvning = new HashSet<OrganisationArvning>();
+            this.TestamentOpretter = new HashSet<TestamentOpretter>();
             this.Bobestyrer = new HashSet<Bobestyrer>();
         }
     
-        public int formId { get; set; }
-        public string session_id { get; set; }
-        public string hvordan_vil_du_oprette_testamentet { get; set; }
-        public string hvilket_testamente_onskes { get; set; }
-        public string civilstand { get; set; }
-        public string dit_navn { get; set; }
-        public string dit_aegtefaelles_navn { get; set; }
-        public Nullable<bool> har_du_tidligere_opretettet_testamente_selv { get; set; }
-        public Nullable<bool> har_du_tidligere_opretettet_testamente_aegtefaelle { get; set; }
-        public Nullable<bool> har_du_saereje_selv { get; set; }
-        public Nullable<bool> har_du_saereje_aegtefaelle { get; set; }
-        public Nullable<System.DateTime> createdDateTime { get; set; }
-        public Nullable<System.DateTime> modificationDateTime { get; set; }
+        public int Id { get; set; }
+        public string Session_Id { get; set; }
+        public string Hvordan_vil_du_oprette_testamentet { get; set; }
+        public string Hvilket_testamente_onskes { get; set; }
+        public string Civilstand { get; set; }
+        public string Dit_navn { get; set; }
+        public string Dit_aegtefaelles_navn { get; set; }
         public string Din_samlevers_navn { get; set; }
         public string Den_anden_persons_navn { get; set; }
-        public Nullable<bool> Sidder_du_i_uskiftet_bo { get; set; }
-        public string Dit_Afdoede_aegtefaelles_navn { get; set; }
-        public string Partner_Afdoede_aegtefaelles_navn { get; set; }
+        public Nullable<int> Egn_testamentOpretterId { get; set; }
+        public Nullable<int> Partner_testamentOpretterId { get; set; }
         public Nullable<bool> Vil_i_donere_arv_til_velgoerenhed { get; set; }
         public Nullable<bool> Skal_arven_fordeles { get; set; }
+        public Nullable<bool> Oensker_i_sidde_i_uskiftet_bo_efter_hinanden { get; set; }
         public Nullable<bool> Uskiftet_bo_til_laengstlevende { get; set; }
         public Nullable<bool> Skal_arvingerne_have_saereje_med_arven { get; set; }
         public Nullable<bool> Vil_i_give_en_arving_fortrinsret { get; set; }
         public Nullable<bool> Vil_baandlaegge_arv { get; set; }
         public Nullable<bool> Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer { get; set; }
-        public string Arvingens_stedfortraeder_navn { get; set; }
-        public Nullable<bool> Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort { get; set; }
-        public string Navn_paa_vaergei { get; set; }
-        public string Jeres_relation_til_vaergen { get; set; }
-        public Nullable<int> Angiv_evt_ekstra_raadighedsbeloeb_pr_barn_pr_maaned { get; set; }
-        public string Begrundelse_og_oevrige_kommentarer { get; set; }
         public Nullable<bool> Skal_boet_betale_for_vedligeholdelse_jeres_gravsted { get; set; }
         public Nullable<bool> Vil_i_indsaette_en_bobestyrer { get; set; }
-        public string Kommentarer_til_bobestyrer { get; set; }
+        public Nullable<int> bobestyrerId { get; set; }
         public Nullable<bool> Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet { get; set; }
-        public Nullable<bool> Sidder_din_partner_i_uskiftet_bo { get; set; }
-        public Nullable<int> BobestyreId { get; set; }
-        public string Begrundelse_for_valg_af_vaerge { get; set; }
         public string Begraensning { get; set; }
         public string Begrundelse_for_mulig_aendring { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.DateTime> ModificationDateTime { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Arvning> Arvning { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrganisationArvning> OrganisationArvning { get; set; }
         public virtual SESSIONS_API SESSIONS_API { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TestamentOpretter> TestamentOpretter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bobestyrer> Bobestyrer { get; set; }
     }

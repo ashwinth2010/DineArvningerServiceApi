@@ -8,8 +8,11 @@ namespace DineArvningerServiceApi.Models.Requests
 {
     public class TestamentaBestemmelseSpgToRequest
     {
+        public bool Skal_arvingerne_have_saereje_med_arven { get; set; }
 
-        public bool Vil_i_give_en_arving_fortrinsret { get; set; }
+        public string Hvordan_vil_du_oprette_testamentet { get; set; }
+
+        public string Hvilket_testamente_onskes { get; set; }
 
         public TestamentOpretter EgnTestament { get; set; }
 
@@ -17,8 +20,7 @@ namespace DineArvningerServiceApi.Models.Requests
 
         public List<Arvinge> ArvingerList { get; set; }
 
-        public List<ArvingeOrganisation> VedgoerendeOrganisationArvingeList { get; set; }
-
         public string SessionId { get; set; }
+
     }
 }
