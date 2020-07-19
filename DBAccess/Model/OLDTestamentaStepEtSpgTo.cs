@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class TestamentaStepEtSpgTo
+    public class OLDTestamentaStepEtSpgTo
     {
 
         public string SessionId { get; set; }

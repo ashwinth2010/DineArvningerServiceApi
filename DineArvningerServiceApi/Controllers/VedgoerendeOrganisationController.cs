@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace DineArvningerServiceApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:44391", headers: "*", methods: "*")]
 
     public class VedgoerendeOrganisationController : ApiController
     {

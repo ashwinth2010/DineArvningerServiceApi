@@ -14,6 +14,12 @@ namespace DBAccess
     
     public partial class Adresse
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Adresse()
+        {
+            this.TestamentaOpretter = new HashSet<TestamentaOpretter>();
+        }
+    
         public int Id { get; set; }
         public string Dit_fulde_navn { get; set; }
         public string Adresse1 { get; set; }
@@ -24,5 +30,8 @@ namespace DBAccess
         public Nullable<System.DateTime> Foedselsdagsdato { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.DateTime> ModificationDateTime { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TestamentaOpretter> TestamentaOpretter { get; set; }
     }
 }

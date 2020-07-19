@@ -33,5 +33,11 @@ namespace DBAccess
         public virtual DbSet<TestamentaOpretter> TestamentaOpretter { get; set; }
         public virtual DbSet<OrganisationArvinger> OrganisationArvinger { get; set; }
         public virtual DbSet<Arvinger> Arvinger { get; set; }
+        public virtual DbSet<Vaerge> Vaerge { get; set; }
+        public virtual DbSet<Bobestyrer> Bobestyrer { get; set; }
+        public virtual DbSet<Arvning> Arvning { get; set; }
+        public virtual DbSet<OrganisationArvning> OrganisationArvning { get; set; }
+        public virtual DbSet<Testamenta_form> Testamenta_form { get; set; }
+        public virtual DbSet<TestamentOpretter> TestamentOpretter { get; set; }
     }
 }

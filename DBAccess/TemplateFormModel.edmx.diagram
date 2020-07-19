@@ -13,10 +13,25 @@
         <EntityTypeShape EntityType="dinearvningerModel.VedgoerendeOrganisation" Width="1.5" PointX="5.75" PointY="4" />
         <EntityTypeShape EntityType="dinearvningerModel.TestamentaOpretter" Width="1.5" PointX="3" PointY="11.25" />
         <AssociationConnector Association="dinearvningerModel.FK_TestamentaOpretter_sessionId" />
-        <EntityTypeShape EntityType="dinearvningerModel.OrganisationArvinger" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="dinearvningerModel.OrganisationArvinger" Width="1.5" PointX="3" PointY="17.625" />
         <AssociationConnector Association="dinearvningerModel.FK_OrganisationArvinger_sessionId" />
         <EntityTypeShape EntityType="dinearvningerModel.Arvinger" Width="1.5" PointX="3" PointY="21.5" />
         <AssociationConnector Association="dinearvningerModel.FK_Arvinger_sessionId" />
+        <AssociationConnector Association="dinearvningerModel.FK__Testament__Adres__787EE5A0" />
+        <EntityTypeShape EntityType="dinearvningerModel.Vaerge" Width="1.5" PointX="5.25" PointY="13.125" />
+        <AssociationConnector Association="dinearvningerModel.FK_Vaerge_testamentOpretteId" />
+        <EntityTypeShape EntityType="dinearvningerModel.Bobestyrer" Width="1.5" PointX="5.25" PointY="8.375" />
+        <AssociationConnector Association="dinearvningerModel.FK_Bobestyrer_TestamentId" />
+        <EntityTypeShape EntityType="dinearvningerModel.Arvning" Width="1.5" PointX="5.25" PointY="34.875" />
+        <EntityTypeShape EntityType="dinearvningerModel.OrganisationArvning" Width="1.5" PointX="5.25" PointY="40.875" />
+        <EntityTypeShape EntityType="dinearvningerModel.Testamenta_form" Width="1.5" PointX="3" PointY="32.625" />
+        <EntityTypeShape EntityType="dinearvningerModel.TestamentOpretter" Width="1.5" PointX="5.25" PointY="27.5" />
+        <AssociationConnector Association="dinearvningerModel.FK_Arvning_TestamentFormId" />
+        <AssociationConnector Association="dinearvningerModel.FK_OrganisationArvning_TestamentFormId" />
+        <AssociationConnector Association="dinearvningerModel.FK_Testamenta_form_sessionId" />
+        <AssociationConnector Association="dinearvningerModel.FK_Testamenta_Opretter_TestamentFormId" />
+        <AssociationConnector Association="dinearvningerModel.FK__Vaerge__Testamen__29221CFB" />
+        <AssociationConnector Association="dinearvningerModel.FK__Bobestyre__Testa__2A164134" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

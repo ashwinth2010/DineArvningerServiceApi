@@ -46,6 +46,46 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Arvning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Testament_Form_Id" Type="int" />
+          <Property Name="Arvingen_navn" Type="varchar" MaxLength="120" />
+          <Property Name="Foedselsdato" Type="datetime" />
+          <Property Name="RelationTilArvingen" Type="varchar" MaxLength="200" />
+          <Property Name="Er_barnet_i_live" Type="bit" />
+          <Property Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" Type="bit" />
+          <Property Name="Uddyb_relation_til_arvingen" Type="varchar" MaxLength="200" />
+          <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="varchar" MaxLength="100" />
+          <Property Name="Saerejeform" Type="varchar" MaxLength="30" />
+          <Property Name="MaaSaerejetAendres" Type="bit" />
+          <Property Name="Aendringsbetingelser" Type="varchar" MaxLength="200" />
+          <Property Name="Fortrinsret" Type="bit" />
+          <Property Name="Genstande" Type="varchar" MaxLength="200" />
+          <Property Name="Vil_du_BaandlaeggeArv" Type="bit" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="varchar" MaxLength="200" />
+          <Property Name="Arvingens_stedfortraeder" Type="varchar" MaxLength="200" />
+          <Property Name="ErActive" Type="bit" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bobestyrer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestamentId" Type="int" Nullable="false" />
+          <Property Name="Navn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="50" />
+          <Property Name="Postnummer" Type="int" />
+          <Property Name="Bynavn" Type="varchar" MaxLength="30" />
+          <Property Name="Kommentarer_til_bobestyrer" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="CREDENTIALS_API">
           <Key>
             <PropertyRef Name="userId" />
@@ -75,6 +115,24 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="OrganisationArvning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Testament_Form_Id" Type="int" />
+          <Property Name="OrganisationId" Type="int" />
+          <Property Name="ArvEllerLegatar" Type="varchar" MaxLength="20" />
+          <Property Name="Fortrinsret" Type="bit" />
+          <Property Name="Genstande" Type="varchar" MaxLength="200" />
+          <Property Name="BaandlaeggeArv" Type="bit" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="varchar" MaxLength="100" />
+          <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="varchar" MaxLength="100" />
+          <Property Name="ErActive" Type="bit" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="SESSIONS_API">
           <Key>
             <PropertyRef Name="session_id" />
@@ -85,6 +143,38 @@
           <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="createdDateTime" Type="datetime" />
           <Property Name="modificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Testamenta_form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Session_Id" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Hvordan_vil_du_oprette_testamentet" Type="varchar" MaxLength="40" />
+          <Property Name="Hvilket_testamente_onskes" Type="varchar" MaxLength="40" />
+          <Property Name="Civilstand" Type="varchar" MaxLength="40" />
+          <Property Name="Dit_navn" Type="varchar" MaxLength="100" />
+          <Property Name="Dit_aegtefaelles_navn" Type="varchar" MaxLength="100" />
+          <Property Name="Din_samlevers_navn" Type="varchar" MaxLength="100" />
+          <Property Name="Den_anden_persons_navn" Type="varchar" MaxLength="100" />
+          <Property Name="Egn_testamentOpretterId" Type="int" />
+          <Property Name="Partner_testamentOpretterId" Type="int" />
+          <Property Name="Vil_i_donere_arv_til_velgoerenhed" Type="bit" />
+          <Property Name="Skal_arven_fordeles" Type="bit" />
+          <Property Name="Oensker_i_sidde_i_uskiftet_bo_efter_hinanden" Type="bit" />
+          <Property Name="Uskiftet_bo_til_laengstlevende" Type="bit" />
+          <Property Name="Skal_arvingerne_have_saereje_med_arven" Type="bit" />
+          <Property Name="Vil_i_give_en_arving_fortrinsret" Type="bit" />
+          <Property Name="Vil_baandlaegge_arv" Type="bit" />
+          <Property Name="Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer" Type="bit" />
+          <Property Name="Skal_boet_betale_for_vedligeholdelse_jeres_gravsted" Type="bit" />
+          <Property Name="Vil_i_indsaette_en_bobestyrer" Type="bit" />
+          <Property Name="bobestyrerId" Type="int" />
+          <Property Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" Type="bit" />
+          <Property Name="Begraensning" Type="varchar" MaxLength="150" />
+          <Property Name="Begrundelse_for_mulig_aendring" Type="varchar" MaxLength="150" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Testamenta_form_API">
           <Key>
@@ -126,6 +216,10 @@
           <Property Name="Kommentarer_til_bobestyrer" Type="varchar" MaxLength="100" />
           <Property Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" Type="bit" />
           <Property Name="Sidder_din_partner_i_uskiftet_bo" Type="bit" />
+          <Property Name="BobestyreId" Type="int" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="varchar" MaxLength="200" />
+          <Property Name="Begraensning" Type="varchar" MaxLength="200" />
+          <Property Name="Begrundelse_for_mulig_aendring" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="TestamentaOpretter">
           <Key>
@@ -149,6 +243,55 @@
           <Property Name="har_du_saereje" Type="bit" Nullable="false" />
           <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
           <Property Name="Ejendele" Type="varchar" MaxLength="100" />
+          <Property Name="VaergeId" Type="int" />
+          <Property Name="AdresseId" Type="int" />
+          <Property Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" Type="bit" />
+          <Property Name="Relation_til_vaergen" Type="varchar" MaxLength="100" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TestamentOpretter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Testament_Form_Id" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="Fornavn" Type="varchar" MaxLength="60" />
+          <Property Name="Efternavn" Type="varchar" MaxLength="60" />
+          <Property Name="Fulde_navn" Type="varchar" MaxLength="120" />
+          <Property Name="AdresseId" Type="int" />
+          <Property Name="Har_du_tidligere_opretettet_testamenta" Type="bit" />
+          <Property Name="har_du_saereje" Type="bit" />
+          <Property Name="Saereje_type" Type="varchar" MaxLength="40" />
+          <Property Name="Er_saereje_tidsbegraenset" Type="bit" />
+          <Property Name="Saereje_tidsbegraensnings_dato" Type="varchar" MaxLength="40" />
+          <Property Name="Saerejet_daekker" Type="varchar" MaxLength="100" />
+          <Property Name="Saerejeform" Type="varchar" MaxLength="30" />
+          <Property Name="MaaSaerejetAendres" Type="bit" />
+          <Property Name="Aendringsbetingelser" Type="varchar" MaxLength="200" />
+          <Property Name="Fortrinsret" Type="bit" />
+          <Property Name="Genstande" Type="varchar" MaxLength="200" />
+          <Property Name="Sidder_du_i_uskiftet_bo" Type="bit" />
+          <Property Name="Dit_Afdoede_aegtefaelles_navn" Type="varchar" MaxLength="100" />
+          <Property Name="FordelingiPct" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="varchar" MaxLength="100" />
+          <Property Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" Type="bit" />
+          <Property Name="VaergeId" Type="int" />
+          <Property Name="Relation_til_vaergen" Type="varchar" MaxLength="200" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="varchar" MaxLength="200" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Vaerge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestamentOpretteId" Type="int" Nullable="false" />
+          <Property Name="Navn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Raadighedsbelob_til_vaergen" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="VedgoerendeOrganisation">
           <Key>
@@ -165,6 +308,30 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="ModificationDateTime" Type="datetime" />
         </EntityType>
+        <Association Name="FK__Bobestyre__Testa__2A164134">
+          <End Role="Testamenta_form" Type="Self.Testamenta_form" Multiplicity="1" />
+          <End Role="Bobestyrer" Type="Self.Bobestyrer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bobestyrer">
+              <PropertyRef Name="TestamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Testament__Adres__787EE5A0">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="0..1" />
+          <End Role="TestamentaOpretter" Type="Self.TestamentaOpretter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestamentaOpretter">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Testament__sessi__3D5E1FD2">
           <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
           <End Role="Testamenta_form_API" Type="Self.Testamenta_form_API" Multiplicity="*" />
@@ -174,6 +341,18 @@
             </Principal>
             <Dependent Role="Testamenta_form_API">
               <PropertyRef Name="session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vaerge__Testamen__29221CFB">
+          <End Role="TestamentOpretter" Type="Self.TestamentOpretter" Multiplicity="1" />
+          <End Role="Vaerge" Type="Self.Vaerge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestamentOpretter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaerge">
+              <PropertyRef Name="TestamentOpretteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -189,6 +368,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Arvning_TestamentFormId">
+          <End Role="Testamenta_form" Type="Self.Testamenta_form" Multiplicity="0..1" />
+          <End Role="Arvning" Type="Self.Arvning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arvning">
+              <PropertyRef Name="Testament_Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrganisationArvinger_sessionId">
           <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
           <End Role="OrganisationArvinger" Type="Self.OrganisationArvinger" Multiplicity="*" />
@@ -198,6 +389,42 @@
             </Principal>
             <Dependent Role="OrganisationArvinger">
               <PropertyRef Name="Session_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganisationArvning_TestamentFormId">
+          <End Role="Testamenta_form" Type="Self.Testamenta_form" Multiplicity="0..1" />
+          <End Role="OrganisationArvning" Type="Self.OrganisationArvning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrganisationArvning">
+              <PropertyRef Name="Testament_Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Testamenta_form_sessionId">
+          <End Role="SESSIONS_API" Type="Self.SESSIONS_API" Multiplicity="1" />
+          <End Role="Testamenta_form" Type="Self.Testamenta_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Testamenta_form">
+              <PropertyRef Name="Session_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Testamenta_Opretter_TestamentFormId">
+          <End Role="Testamenta_form" Type="Self.Testamenta_form" Multiplicity="0..1" />
+          <End Role="TestamentOpretter" Type="Self.TestamentOpretter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestamentOpretter">
+              <PropertyRef Name="Testament_Form_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,23 +443,57 @@
         <EntityContainer Name="dinearvningerModelStoreContainer">
           <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Arvinger" EntityType="Self.Arvinger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Arvning" EntityType="Self.Arvning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bobestyrer" EntityType="Self.Bobestyrer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CREDENTIALS_API" EntityType="Self.CREDENTIALS_API" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrganisationArvinger" EntityType="Self.OrganisationArvinger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganisationArvning" EntityType="Self.OrganisationArvning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESSIONS_API" EntityType="Self.SESSIONS_API" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testamenta_form" EntityType="Self.Testamenta_form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Testamenta_form_API" EntityType="Self.Testamenta_form_API" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestamentaOpretter" EntityType="Self.TestamentaOpretter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestamentOpretter" EntityType="Self.TestamentOpretter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaerge" EntityType="Self.Vaerge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VedgoerendeOrganisation" EntityType="Self.VedgoerendeOrganisation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bobestyre__Testa__2A164134" Association="Self.FK__Bobestyre__Testa__2A164134">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="Bobestyrer" EntitySet="Bobestyrer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Testament__Adres__787EE5A0" Association="Self.FK__Testament__Adres__787EE5A0">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="TestamentaOpretter" EntitySet="TestamentaOpretter" />
+          </AssociationSet>
           <AssociationSet Name="FK__Testament__sessi__3D5E1FD2" Association="Self.FK__Testament__sessi__3D5E1FD2">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vaerge__Testamen__29221CFB" Association="Self.FK__Vaerge__Testamen__29221CFB">
+            <End Role="TestamentOpretter" EntitySet="TestamentOpretter" />
+            <End Role="Vaerge" EntitySet="Vaerge" />
           </AssociationSet>
           <AssociationSet Name="FK_Arvinger_sessionId" Association="Self.FK_Arvinger_sessionId">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="Arvinger" EntitySet="Arvinger" />
           </AssociationSet>
+          <AssociationSet Name="FK_Arvning_TestamentFormId" Association="Self.FK_Arvning_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="Arvning" EntitySet="Arvning" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrganisationArvinger_sessionId" Association="Self.FK_OrganisationArvinger_sessionId">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="OrganisationArvinger" EntitySet="OrganisationArvinger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganisationArvning_TestamentFormId" Association="Self.FK_OrganisationArvning_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="OrganisationArvning" EntitySet="OrganisationArvning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Testamenta_form_sessionId" Association="Self.FK_Testamenta_form_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Testamenta_Opretter_TestamentFormId" Association="Self.FK_Testamenta_Opretter_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="TestamentOpretter" EntitySet="TestamentOpretter" />
           </AssociationSet>
           <AssociationSet Name="FK_TestamentaOpretter_sessionId" Association="Self.FK_TestamentaOpretter_sessionId">
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
@@ -279,6 +540,48 @@
             <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
             <End Role="Arvinger" EntitySet="Arvinger" />
           </AssociationSet>
+          <AssociationSet Name="FK__Testament__Adres__787EE5A0" Association="dinearvningerModel.FK__Testament__Adres__787EE5A0">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="TestamentaOpretter" EntitySet="TestamentaOpretter" />
+          </AssociationSet>
+          <EntitySet Name="Vaerge" EntityType="dinearvningerModel.Vaerge" />
+          <AssociationSet Name="FK_Vaerge_testamentOpretteId" Association="dinearvningerModel.FK_Vaerge_testamentOpretteId">
+            <End Role="TestamentaOpretter" EntitySet="TestamentaOpretter" />
+            <End Role="Vaerge" EntitySet="Vaerge" />
+          </AssociationSet>
+          <EntitySet Name="Bobestyrer" EntityType="dinearvningerModel.Bobestyrer" />
+          <AssociationSet Name="FK_Bobestyrer_TestamentId" Association="dinearvningerModel.FK_Bobestyrer_TestamentId">
+            <End Role="Testamenta_form_API" EntitySet="Testamenta_form_API" />
+            <End Role="Bobestyrer" EntitySet="Bobestyrer" />
+          </AssociationSet>
+          <EntitySet Name="Arvning" EntityType="dinearvningerModel.Arvning" />
+          <EntitySet Name="OrganisationArvning" EntityType="dinearvningerModel.OrganisationArvning" />
+          <EntitySet Name="Testamenta_form" EntityType="dinearvningerModel.Testamenta_form" />
+          <EntitySet Name="TestamentOpretter" EntityType="dinearvningerModel.TestamentOpretter" />
+          <AssociationSet Name="FK_Arvning_TestamentFormId" Association="dinearvningerModel.FK_Arvning_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="Arvning" EntitySet="Arvning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganisationArvning_TestamentFormId" Association="dinearvningerModel.FK_OrganisationArvning_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="OrganisationArvning" EntitySet="OrganisationArvning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Testamenta_form_sessionId" Association="dinearvningerModel.FK_Testamenta_form_sessionId">
+            <End Role="SESSIONS_API" EntitySet="SESSIONS_API" />
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Testamenta_Opretter_TestamentFormId" Association="dinearvningerModel.FK_Testamenta_Opretter_TestamentFormId">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="TestamentOpretter" EntitySet="TestamentOpretter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vaerge__Testamen__29221CFB" Association="dinearvningerModel.FK__Vaerge__Testamen__29221CFB">
+            <End Role="TestamentOpretter" EntitySet="TestamentOpretter" />
+            <End Role="Vaerge" EntitySet="Vaerge" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bobestyre__Testa__2A164134" Association="dinearvningerModel.FK__Bobestyre__Testa__2A164134">
+            <End Role="Testamenta_form" EntitySet="Testamenta_form" />
+            <End Role="Bobestyrer" EntitySet="Bobestyrer" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SESSIONS_API">
           <Key>
@@ -294,6 +597,7 @@
           <NavigationProperty Name="TestamentaOpretter" Relationship="dinearvningerModel.FK_TestamentaOpretter_sessionId" FromRole="SESSIONS_API" ToRole="TestamentaOpretter" />
           <NavigationProperty Name="OrganisationArvinger" Relationship="dinearvningerModel.FK_OrganisationArvinger_sessionId" FromRole="SESSIONS_API" ToRole="OrganisationArvinger" />
           <NavigationProperty Name="Arvinger" Relationship="dinearvningerModel.FK_Arvinger_sessionId" FromRole="SESSIONS_API" ToRole="Arvinger" />
+          <NavigationProperty Name="Testamenta_form" Relationship="dinearvningerModel.FK_Testamenta_form_sessionId" FromRole="SESSIONS_API" ToRole="Testamenta_form" />
         </EntityType>
         <EntityType Name="Testamenta_form_API">
           <Key>
@@ -336,6 +640,11 @@
           <Property Name="Kommentarer_til_bobestyrer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" Type="Boolean" />
           <Property Name="Sidder_din_partner_i_uskiftet_bo" Type="Boolean" />
+          <Property Name="BobestyreId" Type="Int32" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bobestyrer" Relationship="dinearvningerModel.FK_Bobestyrer_TestamentId" FromRole="Testamenta_form_API" ToRole="Bobestyrer" />
+          <Property Name="Begraensning" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Begrundelse_for_mulig_aendring" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Testament__sessi__3D5E1FD2">
           <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
@@ -363,6 +672,7 @@
           <Property Name="Foedselsdagsdato" Type="DateTime" Precision="3" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TestamentaOpretter" Relationship="dinearvningerModel.FK__Testament__Adres__787EE5A0" FromRole="Adresse" ToRole="TestamentaOpretter" />
         </EntityType>
         <EntityType Name="VedgoerendeOrganisation">
           <Key>
@@ -402,6 +712,13 @@
           <Property Name="har_du_saereje" Type="Boolean" Nullable="false" />
           <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
           <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VaergeId" Type="Int32" />
+          <Property Name="AdresseId" Type="Int32" />
+          <NavigationProperty Name="Adresse" Relationship="dinearvningerModel.FK__Testament__Adres__787EE5A0" FromRole="TestamentaOpretter" ToRole="Adresse" />
+          <Property Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" Type="Boolean" />
+          <Property Name="Relation_til_vaergen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vaerge" Relationship="dinearvningerModel.FK_Vaerge_testamentOpretteId" FromRole="TestamentaOpretter" ToRole="Vaerge" />
         </EntityType>
         <Association Name="FK_TestamentaOpretter_sessionId">
           <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
@@ -485,6 +802,261 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Testament__Adres__787EE5A0">
+          <End Type="dinearvningerModel.Adresse" Role="Adresse" Multiplicity="0..1" />
+          <End Type="dinearvningerModel.TestamentaOpretter" Role="TestamentaOpretter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestamentaOpretter">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Vaerge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestamentOpretteId" Type="Int32" Nullable="false" />
+          <Property Name="Navn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Raadighedsbelob_til_vaergen" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TestamentaOpretter" Relationship="dinearvningerModel.FK_Vaerge_testamentOpretteId" FromRole="Vaerge" ToRole="TestamentaOpretter" />
+          <NavigationProperty Name="TestamentOpretter" Relationship="dinearvningerModel.FK__Vaerge__Testamen__29221CFB" FromRole="Vaerge" ToRole="TestamentOpretter" />
+        </EntityType>
+        <Association Name="FK_Vaerge_testamentOpretteId">
+          <End Type="dinearvningerModel.TestamentaOpretter" Role="TestamentaOpretter" Multiplicity="1" />
+          <End Type="dinearvningerModel.Vaerge" Role="Vaerge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestamentaOpretter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaerge">
+              <PropertyRef Name="TestamentOpretteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bobestyrer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestamentId" Type="Int32" Nullable="false" />
+          <Property Name="Navn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Postnummer" Type="Int32" />
+          <Property Name="Bynavn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Kommentarer_til_bobestyrer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Testamenta_form_API" Relationship="dinearvningerModel.FK_Bobestyrer_TestamentId" FromRole="Bobestyrer" ToRole="Testamenta_form_API" />
+          <NavigationProperty Name="Testamenta_form" Relationship="dinearvningerModel.FK__Bobestyre__Testa__2A164134" FromRole="Bobestyrer" ToRole="Testamenta_form" />
+        </EntityType>
+        <Association Name="FK_Bobestyrer_TestamentId">
+          <End Type="dinearvningerModel.Testamenta_form_API" Role="Testamenta_form_API" Multiplicity="1" />
+          <End Type="dinearvningerModel.Bobestyrer" Role="Bobestyrer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form_API">
+              <PropertyRef Name="formId" />
+            </Principal>
+            <Dependent Role="Bobestyrer">
+              <PropertyRef Name="TestamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Arvning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Testament_Form_Id" Type="Int32" />
+          <Property Name="Arvingen_navn" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="Foedselsdato" Type="DateTime" Precision="3" />
+          <Property Name="RelationTilArvingen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Er_barnet_i_live" Type="Boolean" />
+          <Property Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" Type="Boolean" />
+          <Property Name="Uddyb_relation_til_arvingen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Saerejeform" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MaaSaerejetAendres" Type="Boolean" />
+          <Property Name="Aendringsbetingelser" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fortrinsret" Type="Boolean" />
+          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Vil_du_BaandlaeggeArv" Type="Boolean" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Arvingens_stedfortraeder" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ErActive" Type="Boolean" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Testamenta_form" Relationship="dinearvningerModel.FK_Arvning_TestamentFormId" FromRole="Arvning" ToRole="Testamenta_form" />
+        </EntityType>
+        <EntityType Name="OrganisationArvning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Testament_Form_Id" Type="Int32" />
+          <Property Name="OrganisationId" Type="Int32" />
+          <Property Name="ArvEllerLegatar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fortrinsret" Type="Boolean" />
+          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BaandlaeggeArv" Type="Boolean" />
+          <Property Name="Hvornaar_skal_baandlaeggelsen_ophoere" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ErActive" Type="Boolean" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Testamenta_form" Relationship="dinearvningerModel.FK_OrganisationArvning_TestamentFormId" FromRole="OrganisationArvning" ToRole="Testamenta_form" />
+        </EntityType>
+        <EntityType Name="Testamenta_form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Session_Id" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Hvordan_vil_du_oprette_testamentet" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Hvilket_testamente_onskes" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Civilstand" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Dit_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Dit_aegtefaelles_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Din_samlevers_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Den_anden_persons_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Egn_testamentOpretterId" Type="Int32" />
+          <Property Name="Partner_testamentOpretterId" Type="Int32" />
+          <Property Name="Vil_i_donere_arv_til_velgoerenhed" Type="Boolean" />
+          <Property Name="Skal_arven_fordeles" Type="Boolean" />
+          <Property Name="Oensker_i_sidde_i_uskiftet_bo_efter_hinanden" Type="Boolean" />
+          <Property Name="Uskiftet_bo_til_laengstlevende" Type="Boolean" />
+          <Property Name="Skal_arvingerne_have_saereje_med_arven" Type="Boolean" />
+          <Property Name="Vil_i_give_en_arving_fortrinsret" Type="Boolean" />
+          <Property Name="Vil_baandlaegge_arv" Type="Boolean" />
+          <Property Name="Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer" Type="Boolean" />
+          <Property Name="Skal_boet_betale_for_vedligeholdelse_jeres_gravsted" Type="Boolean" />
+          <Property Name="Vil_i_indsaette_en_bobestyrer" Type="Boolean" />
+          <Property Name="bobestyrerId" Type="Int32" />
+          <Property Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" Type="Boolean" />
+          <Property Name="Begraensning" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Begrundelse_for_mulig_aendring" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Arvning" Relationship="dinearvningerModel.FK_Arvning_TestamentFormId" FromRole="Testamenta_form" ToRole="Arvning" />
+          <NavigationProperty Name="OrganisationArvning" Relationship="dinearvningerModel.FK_OrganisationArvning_TestamentFormId" FromRole="Testamenta_form" ToRole="OrganisationArvning" />
+          <NavigationProperty Name="SESSIONS_API" Relationship="dinearvningerModel.FK_Testamenta_form_sessionId" FromRole="Testamenta_form" ToRole="SESSIONS_API" />
+          <NavigationProperty Name="TestamentOpretter" Relationship="dinearvningerModel.FK_Testamenta_Opretter_TestamentFormId" FromRole="Testamenta_form" ToRole="TestamentOpretter" />
+          <NavigationProperty Name="Bobestyrer" Relationship="dinearvningerModel.FK__Bobestyre__Testa__2A164134" FromRole="Testamenta_form" ToRole="Bobestyrer" />
+        </EntityType>
+        <EntityType Name="TestamentOpretter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Testament_Form_Id" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fornavn" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Efternavn" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Fulde_navn" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="AdresseId" Type="Int32" />
+          <Property Name="Har_du_tidligere_opretettet_testamenta" Type="Boolean" />
+          <Property Name="har_du_saereje" Type="Boolean" />
+          <Property Name="Saereje_type" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Er_saereje_tidsbegraenset" Type="Boolean" />
+          <Property Name="Saereje_tidsbegraensnings_dato" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Saerejet_daekker" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Saerejeform" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MaaSaerejetAendres" Type="Boolean" />
+          <Property Name="Aendringsbetingelser" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fortrinsret" Type="Boolean" />
+          <Property Name="Genstande" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Sidder_du_i_uskiftet_bo" Type="Boolean" />
+          <Property Name="Dit_Afdoede_aegtefaelles_navn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FordelingiPct" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Ejendele" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" Type="Boolean" />
+          <Property Name="VaergeId" Type="Int32" />
+          <Property Name="Relation_til_vaergen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Begrundelse_for_valg_af_vaerge" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Testamenta_form" Relationship="dinearvningerModel.FK_Testamenta_Opretter_TestamentFormId" FromRole="TestamentOpretter" ToRole="Testamenta_form" />
+          <NavigationProperty Name="Vaerge" Relationship="dinearvningerModel.FK__Vaerge__Testamen__29221CFB" FromRole="TestamentOpretter" ToRole="Vaerge" />
+        </EntityType>
+        <Association Name="FK_Arvning_TestamentFormId">
+          <End Type="dinearvningerModel.Testamenta_form" Role="Testamenta_form" Multiplicity="0..1" />
+          <End Type="dinearvningerModel.Arvning" Role="Arvning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Arvning">
+              <PropertyRef Name="Testament_Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganisationArvning_TestamentFormId">
+          <End Type="dinearvningerModel.Testamenta_form" Role="Testamenta_form" Multiplicity="0..1" />
+          <End Type="dinearvningerModel.OrganisationArvning" Role="OrganisationArvning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrganisationArvning">
+              <PropertyRef Name="Testament_Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Testamenta_form_sessionId">
+          <End Type="dinearvningerModel.SESSIONS_API" Role="SESSIONS_API" Multiplicity="1" />
+          <End Type="dinearvningerModel.Testamenta_form" Role="Testamenta_form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESSIONS_API">
+              <PropertyRef Name="session_id" />
+            </Principal>
+            <Dependent Role="Testamenta_form">
+              <PropertyRef Name="Session_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Testamenta_Opretter_TestamentFormId">
+          <End Type="dinearvningerModel.Testamenta_form" Role="Testamenta_form" Multiplicity="0..1" />
+          <End Type="dinearvningerModel.TestamentOpretter" Role="TestamentOpretter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestamentOpretter">
+              <PropertyRef Name="Testament_Form_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vaerge__Testamen__29221CFB">
+          <End Type="dinearvningerModel.TestamentOpretter" Role="TestamentOpretter" Multiplicity="1" />
+          <End Type="dinearvningerModel.Vaerge" Role="Vaerge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestamentOpretter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaerge">
+              <PropertyRef Name="TestamentOpretteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bobestyre__Testa__2A164134">
+          <End Type="dinearvningerModel.Testamenta_form" Role="Testamenta_form" Multiplicity="1" />
+          <End Type="dinearvningerModel.Bobestyrer" Role="Bobestyrer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Testamenta_form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bobestyrer">
+              <PropertyRef Name="TestamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -518,6 +1090,10 @@
           <EntitySetMapping Name="Testamenta_form_API">
             <EntityTypeMapping TypeName="dinearvningerModel.Testamenta_form_API">
               <MappingFragment StoreEntitySet="Testamenta_form_API">
+                <ScalarProperty Name="Begrundelse_for_mulig_aendring" ColumnName="Begrundelse_for_mulig_aendring" />
+                <ScalarProperty Name="Begraensning" ColumnName="Begraensning" />
+                <ScalarProperty Name="Begrundelse_for_valg_af_vaerge" ColumnName="Begrundelse_for_valg_af_vaerge" />
+                <ScalarProperty Name="BobestyreId" ColumnName="BobestyreId" />
                 <ScalarProperty Name="Sidder_din_partner_i_uskiftet_bo" ColumnName="Sidder_din_partner_i_uskiftet_bo" />
                 <ScalarProperty Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" ColumnName="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" />
                 <ScalarProperty Name="Kommentarer_til_bobestyrer" ColumnName="Kommentarer_til_bobestyrer" />
@@ -592,6 +1168,11 @@
           <EntitySetMapping Name="TestamentaOpretter">
             <EntityTypeMapping TypeName="dinearvningerModel.TestamentaOpretter">
               <MappingFragment StoreEntitySet="TestamentaOpretter">
+                <ScalarProperty Name="Begrundelse_for_valg_af_vaerge" ColumnName="Begrundelse_for_valg_af_vaerge" />
+                <ScalarProperty Name="Relation_til_vaergen" ColumnName="Relation_til_vaergen" />
+                <ScalarProperty Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" ColumnName="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" />
+                <ScalarProperty Name="AdresseId" ColumnName="AdresseId" />
+                <ScalarProperty Name="VaergeId" ColumnName="VaergeId" />
                 <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
                 <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
                 <ScalarProperty Name="har_du_saereje" ColumnName="har_du_saereje" />
@@ -655,6 +1236,146 @@
                 <ScalarProperty Name="Foedselsdato" ColumnName="Foedselsdato" />
                 <ScalarProperty Name="Arvingen_navn" ColumnName="Arvingen_navn" />
                 <ScalarProperty Name="Session_id" ColumnName="Session_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaerge">
+            <EntityTypeMapping TypeName="dinearvningerModel.Vaerge">
+              <MappingFragment StoreEntitySet="Vaerge">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="Raadighedsbelob_til_vaergen" ColumnName="Raadighedsbelob_til_vaergen" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="TestamentOpretteId" ColumnName="TestamentOpretteId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bobestyrer">
+            <EntityTypeMapping TypeName="dinearvningerModel.Bobestyrer">
+              <MappingFragment StoreEntitySet="Bobestyrer">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="Kommentarer_til_bobestyrer" ColumnName="Kommentarer_til_bobestyrer" />
+                <ScalarProperty Name="Bynavn" ColumnName="Bynavn" />
+                <ScalarProperty Name="Postnummer" ColumnName="Postnummer" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="TestamentId" ColumnName="TestamentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arvning">
+            <EntityTypeMapping TypeName="dinearvningerModel.Arvning">
+              <MappingFragment StoreEntitySet="Arvning">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ErActive" ColumnName="ErActive" />
+                <ScalarProperty Name="Arvingens_stedfortraeder" ColumnName="Arvingens_stedfortraeder" />
+                <ScalarProperty Name="Hvornaar_skal_baandlaeggelsen_ophoere" ColumnName="Hvornaar_skal_baandlaeggelsen_ophoere" />
+                <ScalarProperty Name="Vil_du_BaandlaeggeArv" ColumnName="Vil_du_BaandlaeggeArv" />
+                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
+                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
+                <ScalarProperty Name="Aendringsbetingelser" ColumnName="Aendringsbetingelser" />
+                <ScalarProperty Name="MaaSaerejetAendres" ColumnName="MaaSaerejetAendres" />
+                <ScalarProperty Name="Saerejeform" ColumnName="Saerejeform" />
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
+                <ScalarProperty Name="Uddyb_relation_til_arvingen" ColumnName="Uddyb_relation_til_arvingen" />
+                <ScalarProperty Name="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" ColumnName="Skal_arvingen_have_medbestemmelsesret_under_deling_af_boet" />
+                <ScalarProperty Name="Er_barnet_i_live" ColumnName="Er_barnet_i_live" />
+                <ScalarProperty Name="RelationTilArvingen" ColumnName="RelationTilArvingen" />
+                <ScalarProperty Name="Foedselsdato" ColumnName="Foedselsdato" />
+                <ScalarProperty Name="Arvingen_navn" ColumnName="Arvingen_navn" />
+                <ScalarProperty Name="Testament_Form_Id" ColumnName="Testament_Form_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganisationArvning">
+            <EntityTypeMapping TypeName="dinearvningerModel.OrganisationArvning">
+              <MappingFragment StoreEntitySet="OrganisationArvning">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ErActive" ColumnName="ErActive" />
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
+                <ScalarProperty Name="Hvornaar_skal_baandlaeggelsen_ophoere" ColumnName="Hvornaar_skal_baandlaeggelsen_ophoere" />
+                <ScalarProperty Name="BaandlaeggeArv" ColumnName="BaandlaeggeArv" />
+                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
+                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
+                <ScalarProperty Name="ArvEllerLegatar" ColumnName="ArvEllerLegatar" />
+                <ScalarProperty Name="OrganisationId" ColumnName="OrganisationId" />
+                <ScalarProperty Name="Testament_Form_Id" ColumnName="Testament_Form_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testamenta_form">
+            <EntityTypeMapping TypeName="dinearvningerModel.Testamenta_form">
+              <MappingFragment StoreEntitySet="Testamenta_form">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="Begrundelse_for_mulig_aendring" ColumnName="Begrundelse_for_mulig_aendring" />
+                <ScalarProperty Name="Begraensning" ColumnName="Begraensning" />
+                <ScalarProperty Name="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" ColumnName="Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet" />
+                <ScalarProperty Name="bobestyrerId" ColumnName="bobestyrerId" />
+                <ScalarProperty Name="Vil_i_indsaette_en_bobestyrer" ColumnName="Vil_i_indsaette_en_bobestyrer" />
+                <ScalarProperty Name="Skal_boet_betale_for_vedligeholdelse_jeres_gravsted" ColumnName="Skal_boet_betale_for_vedligeholdelse_jeres_gravsted" />
+                <ScalarProperty Name="Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer" ColumnName="Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_jer" />
+                <ScalarProperty Name="Vil_baandlaegge_arv" ColumnName="Vil_baandlaegge_arv" />
+                <ScalarProperty Name="Vil_i_give_en_arving_fortrinsret" ColumnName="Vil_i_give_en_arving_fortrinsret" />
+                <ScalarProperty Name="Skal_arvingerne_have_saereje_med_arven" ColumnName="Skal_arvingerne_have_saereje_med_arven" />
+                <ScalarProperty Name="Uskiftet_bo_til_laengstlevende" ColumnName="Uskiftet_bo_til_laengstlevende" />
+                <ScalarProperty Name="Oensker_i_sidde_i_uskiftet_bo_efter_hinanden" ColumnName="Oensker_i_sidde_i_uskiftet_bo_efter_hinanden" />
+                <ScalarProperty Name="Skal_arven_fordeles" ColumnName="Skal_arven_fordeles" />
+                <ScalarProperty Name="Vil_i_donere_arv_til_velgoerenhed" ColumnName="Vil_i_donere_arv_til_velgoerenhed" />
+                <ScalarProperty Name="Partner_testamentOpretterId" ColumnName="Partner_testamentOpretterId" />
+                <ScalarProperty Name="Egn_testamentOpretterId" ColumnName="Egn_testamentOpretterId" />
+                <ScalarProperty Name="Den_anden_persons_navn" ColumnName="Den_anden_persons_navn" />
+                <ScalarProperty Name="Din_samlevers_navn" ColumnName="Din_samlevers_navn" />
+                <ScalarProperty Name="Dit_aegtefaelles_navn" ColumnName="Dit_aegtefaelles_navn" />
+                <ScalarProperty Name="Dit_navn" ColumnName="Dit_navn" />
+                <ScalarProperty Name="Civilstand" ColumnName="Civilstand" />
+                <ScalarProperty Name="Hvilket_testamente_onskes" ColumnName="Hvilket_testamente_onskes" />
+                <ScalarProperty Name="Hvordan_vil_du_oprette_testamentet" ColumnName="Hvordan_vil_du_oprette_testamentet" />
+                <ScalarProperty Name="Session_Id" ColumnName="Session_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestamentOpretter">
+            <EntityTypeMapping TypeName="dinearvningerModel.TestamentOpretter">
+              <MappingFragment StoreEntitySet="TestamentOpretter">
+                <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="Begrundelse_for_valg_af_vaerge" ColumnName="Begrundelse_for_valg_af_vaerge" />
+                <ScalarProperty Name="Relation_til_vaergen" ColumnName="Relation_til_vaergen" />
+                <ScalarProperty Name="VaergeId" ColumnName="VaergeId" />
+                <ScalarProperty Name="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" ColumnName="Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort" />
+                <ScalarProperty Name="Ejendele" ColumnName="Ejendele" />
+                <ScalarProperty Name="FordelingiPct" ColumnName="FordelingiPct" />
+                <ScalarProperty Name="Dit_Afdoede_aegtefaelles_navn" ColumnName="Dit_Afdoede_aegtefaelles_navn" />
+                <ScalarProperty Name="Sidder_du_i_uskiftet_bo" ColumnName="Sidder_du_i_uskiftet_bo" />
+                <ScalarProperty Name="Genstande" ColumnName="Genstande" />
+                <ScalarProperty Name="Fortrinsret" ColumnName="Fortrinsret" />
+                <ScalarProperty Name="Aendringsbetingelser" ColumnName="Aendringsbetingelser" />
+                <ScalarProperty Name="MaaSaerejetAendres" ColumnName="MaaSaerejetAendres" />
+                <ScalarProperty Name="Saerejeform" ColumnName="Saerejeform" />
+                <ScalarProperty Name="Saerejet_daekker" ColumnName="Saerejet_daekker" />
+                <ScalarProperty Name="Saereje_tidsbegraensnings_dato" ColumnName="Saereje_tidsbegraensnings_dato" />
+                <ScalarProperty Name="Er_saereje_tidsbegraenset" ColumnName="Er_saereje_tidsbegraenset" />
+                <ScalarProperty Name="Saereje_type" ColumnName="Saereje_type" />
+                <ScalarProperty Name="har_du_saereje" ColumnName="har_du_saereje" />
+                <ScalarProperty Name="Har_du_tidligere_opretettet_testamenta" ColumnName="Har_du_tidligere_opretettet_testamenta" />
+                <ScalarProperty Name="AdresseId" ColumnName="AdresseId" />
+                <ScalarProperty Name="Fulde_navn" ColumnName="Fulde_navn" />
+                <ScalarProperty Name="Efternavn" ColumnName="Efternavn" />
+                <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Testament_Form_Id" ColumnName="Testament_Form_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

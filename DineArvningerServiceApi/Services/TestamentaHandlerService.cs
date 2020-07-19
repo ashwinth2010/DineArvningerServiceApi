@@ -6,6 +6,7 @@ using DBAccess.Model;
 using DBAccess.Repositories;
 using DineArvningerServiceApi.MappingHelper;
 using DineArvningerServiceApi.Models.Requests;
+using DineArvningerServiceApi.Models.Requests.TestamentProdukt.Bestemmelser_step4;
 
 namespace DineArvningerServiceApi.Services
 {
@@ -27,21 +28,24 @@ namespace DineArvningerServiceApi.Services
             mappingHelper = new TestamentaMappingHelper();
         }
 
+        //Step 1
         public string savePersonligInfo_step1(TestamentaPersonligSpgEtRequest req) {
 
             var exists = session_repo.sessionExists(req.SessionId);
 
             if (exists)
             {
-                testamenta_repo.createTestamentaOpretter_step1(req.SessionId, req.EgnTestament.Type);
+                int testamentFormId = testamenta_repo.savePersonligInfo_step1(req.Hvordan_vil_du_oprette_testamentet, req.Hvilket_testamente_onskes, req.Civilstand, req.SessionId);
 
-                if (req.PartnerTestment != null) {
+                if(testamentFormId > 0) { 
 
-                    testamenta_repo.createTestamentaOpretter_step1(req.SessionId, req.PartnerTestment.Type);
+                    testamenta_repo.createTestamentaOpretter_step1(testamentFormId, req.EgnTestament.Type);
+
+                    if (req.PartnerTestment != null) {
+
+                        testamenta_repo.createTestamentaOpretter_step1(testamentFormId, req.PartnerTestment.Type);
+                    }
                 }
-
-                testamenta_repo.savePersonligInfo_step1(req.Hvordan_vil_du_oprette_testamentet, req.Hvilket_testamente_onskes, req.Civilstand, req.SessionId);
-
                 return req.SessionId;
             }
             else {
@@ -56,12 +60,12 @@ namespace DineArvningerServiceApi.Services
 
             if (exists)
             {
-                testamenta_repo.UpdateTestamentaOpretter_step2(req.EgnTestament.Navn, req.EgnTestament.Type,req.SessionId);
+                testamenta_repo.UpdateTestamentaOpretter_step2(req.EgnTestament.Navn, "Primary",req.SessionId);
 
                 if (req.PartnerTestment != null)
                 {
 
-                    testamenta_repo.UpdateTestamentaOpretter_step2(req.PartnerTestment.Navn, req.PartnerTestment.Type, req.SessionId);
+                    testamenta_repo.UpdateTestamentaOpretter_step2(req.PartnerTestment.Navn, "Partner", req.SessionId);
                 }
 
                 testamenta_repo.savePersonligInfo_step2(req.Dit_navn,req.Din_aegtefaelles_navn, req.Din_samlevers_navn, req.Den_anden_persons_navn,req.SessionId);
@@ -81,11 +85,11 @@ namespace DineArvningerServiceApi.Services
 
             if (exists)
             {
-                testamenta_repo.UpdateTestamentaOpretter_step3(req.EgnTestament.Har_du_tidligere_oprettet_testamenta, req.EgnTestament.Type, req.SessionId);
+                testamenta_repo.UpdateTestamentaOpretter_step3(req.EgnTestament.Har_du_tidligere_oprettet_testamenta, "Primary", req.SessionId);
 
                 if (req.PartnerTestment != null)
                 {
-                    testamenta_repo.UpdateTestamentaOpretter_step3(req.PartnerTestment.Har_du_tidligere_oprettet_testamenta, req.PartnerTestment.Type, req.SessionId);
+                    testamenta_repo.UpdateTestamentaOpretter_step3(req.PartnerTestment.Har_du_tidligere_oprettet_testamenta, "Partner", req.SessionId);
                 }
 
                 testamenta_repo.savePersonligInfo_step3(req.Har_du_tidligere_oprettet_testamenta_selv, req.Har_du_tidligere_oprettet_testamenta_partner, req.SessionId);
@@ -105,11 +109,11 @@ namespace DineArvningerServiceApi.Services
 
             if (exists)
             {
-                testamenta_repo.UpdateTestamentaOpretter_step4(req.EgnTestament.Sidder_du_i_uskiftet_bo, req.EgnTestament.Dit_Afdoede_aegtefaelles_navn, req.EgnTestament.Type, req.SessionId);
+                testamenta_repo.UpdateTestamentaOpretter_step4(req.EgnTestament.Sidder_du_i_uskiftet_bo, req.EgnTestament.Dit_Afdoede_aegtefaelles_navn, "Primary", req.SessionId);
 
                 if (req.PartnerTestment != null)
                 {
-                    testamenta_repo.UpdateTestamentaOpretter_step4(req.PartnerTestment.Sidder_du_i_uskiftet_bo, req.PartnerTestment.Dit_Afdoede_aegtefaelles_navn, req.PartnerTestment.Type, req.SessionId);
+                    testamenta_repo.UpdateTestamentaOpretter_step4(req.PartnerTestment.Sidder_du_i_uskiftet_bo, req.PartnerTestment.Dit_Afdoede_aegtefaelles_navn, "Partner", req.SessionId);
                 }
 
                 testamenta_repo.savePersonligInfo_step4(req.Sidder_du_i_uskiftet_bo,req.Sidder_din_Partner_i_uskiftet_bo,req.Dit_Afdoede_aegtefaelles_navn,req.Partner_Afdoede_aegtefaelles_navn,req.SessionId);
@@ -129,11 +133,11 @@ namespace DineArvningerServiceApi.Services
 
             if (exists)
             {
-                testamenta_repo.UpdateTestamentaOpretter_step5(req.EgnTestament.Har_du_tidligere_oprettet_testamenta, req.EgnTestament.Type, req.SessionId);
+                testamenta_repo.UpdateTestamentaOpretter_step5(req.EgnTestament.Har_du_saereje, req.EgnTestament.SaerejeType, req.EgnTestament.Er_saereje_tidsbegraenset, req.EgnTestament.Saereje_tidsbegraensnings_dato, req.EgnTestament.Saerejet_daekker, "Primary", req.SessionId);
 
                 if (req.PartnerTestment != null)
                 {
-                    testamenta_repo.UpdateTestamentaOpretter_step5(req.PartnerTestment.Har_du_tidligere_oprettet_testamenta, req.EgnTestament.Type, req.SessionId);
+                    testamenta_repo.UpdateTestamentaOpretter_step5(req.PartnerTestment.Har_du_saereje, req.PartnerTestment.SaerejeType, req.PartnerTestment.Er_saereje_tidsbegraenset, req.PartnerTestment.Saereje_tidsbegraensnings_dato, req.PartnerTestment.Saerejet_daekker, "Partner", req.SessionId);
                 }
 
                 testamenta_repo.savePersonligInfo_step5(req.Har_du_saereje_selv, req.Har_du_saereje_selv_partner, req.SessionId);
@@ -259,8 +263,24 @@ namespace DineArvningerServiceApi.Services
         }
 
         /////Step 4
-
         public string saveBestemmelseInfo_step1(TestamentaBestemmelseSpgEtRequest req) {
+
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+
+                testamenta_repo.saveBestemmelseInfo_step1(req.Oensker_i_sidde_i_uskiftet_bo_efter_hinanden, req.SessionId);
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+
+        }
+
+        public string saveBestemmelseInfo_step2(TestamentaBestemmelseSpgToRequest req) {
 
             var exists = session_repo.sessionExists(req.SessionId);
 
@@ -275,17 +295,18 @@ namespace DineArvningerServiceApi.Services
                 {
 
                     var PartnerTestamentOprette = mappingHelper.MapModelTestamentaOpretterToDBTestamentOprette(req.PartnerTestment);
-                    testamenta_repo.saveBestemmelseInfo_step1_1(egnTestamentOprette, PartnerTestamentOprette, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step2_1(egnTestamentOprette, PartnerTestamentOprette, req.SessionId);
+
                 }
                 else {
 
-                    testamenta_repo.saveBestemmelseInfo_step1_1(egnTestamentOprette, null, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step2_1(egnTestamentOprette, null, req.SessionId);
                 }
 
                 if (req.ArvingerList.Count > 0) {
 
                     var arvningDbList = mappingHelper.MapModelArvingerListToDBArvingerList(req.ArvingerList);
-                    testamenta_repo.saveBestemmelseInfo_step1_2(arvningDbList, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step2_2(arvningDbList, req.SessionId);
                 }
 
                 return req.SessionId;
@@ -296,14 +317,14 @@ namespace DineArvningerServiceApi.Services
             }
 
         }
-
-        public string saveBestemmelseInfo_step2(TestamentaBestemmelseSpgToRequest req) {
+        
+        public string saveBestemmelseInfo_step3(TestamentaBestemmelseSpgTreRequest req) {
 
             var exists = session_repo.sessionExists(req.SessionId);
 
             if (exists)
             {
-                testamenta_repo.saveBestemmelseInfo_step2(req.Vil_i_give_en_arving_fortrinsret, req.SessionId);
+                testamenta_repo.saveBestemmelseInfo_step3(req.Vil_i_give_en_arving_fortrinsret, req.SessionId);
 
                 var egnTestamentOprette = mappingHelper.MapModelTestamentaOpretterToDBTestamentOprette(req.EgnTestament);
 
@@ -312,19 +333,19 @@ namespace DineArvningerServiceApi.Services
                 {
 
                     var PartnerTestamentOprette = mappingHelper.MapModelTestamentaOpretterToDBTestamentOprette(req.PartnerTestment);
-                    testamenta_repo.saveBestemmelseInfo_step1_1(egnTestamentOprette, PartnerTestamentOprette, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step3_1(egnTestamentOprette, PartnerTestamentOprette, req.SessionId);
                 }
                 else
                 {
 
-                    testamenta_repo.saveBestemmelseInfo_step1_1(egnTestamentOprette, null, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step3_1(egnTestamentOprette, null, req.SessionId);
                 }
 
                 if (req.ArvingerList.Count > 0)
                 {
 
                     var arvningDbList = mappingHelper.MapModelArvingerListToDBArvingerList(req.ArvingerList);
-                    testamenta_repo.saveBestemmelseInfo_step1_2(arvningDbList, req.SessionId);
+                    testamenta_repo.saveBestemmelseInfo_step3_2(arvningDbList, req.SessionId);
                 }
 
                 return req.SessionId;
@@ -338,45 +359,14 @@ namespace DineArvningerServiceApi.Services
 
         }
 
-        public string saveBestemmelseInfo_step3(TestamentaBestemmelseSpgTreRequest req) {
-
-            var exists = session_repo.sessionExists(req.SessionId);
-
-            if (exists)
-            {
-                testamenta_repo.saveBestemmelseInfo_step3(req.Vil_baandlaegge_arv, req.SessionId);
-
-                if (req.ArvingerList.Count > 0)
-                {
-
-                    var arvningDbList = mappingHelper.MapModelArvingerListToDBArvingerList(req.ArvingerList);
-                    testamenta_repo.saveBestemmelseInfo_step3_1(arvningDbList, req.SessionId);
-                }
-
-                if (req.VedgoerendeOrganisationArvingeList.Count > 0)
-                {
-
-                    var arvningDbList = mappingHelper.MapModelOrganisationArvingerListToDBOrganisationArvingerList(req.VedgoerendeOrganisationArvingeList);
-                    testamenta_repo.saveBestemmelseInfo_step3_2(arvningDbList, req.SessionId);
-                }
-
-                return req.SessionId;
-
-            }
-            else
-            {
-                return "Invalid SessionId";
-            }
-
-        }
-
+    
         public string saveBestemmelseInfo_step4(TestamentaBestemmelseSpgFireRequest req) {
 
             var exists = session_repo.sessionExists(req.SessionId);
 
             if (exists)
             {
-                testamenta_repo.saveBestemmelseInfo_step4(req.Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_Jer, req.SessionId);
+                testamenta_repo.saveBestemmelseInfo_step4(req.Vil_baandlaegge_arv, req.SessionId);
 
                 if (req.ArvingerList.Count > 0)
                 {
@@ -385,15 +375,174 @@ namespace DineArvningerServiceApi.Services
                     testamenta_repo.saveBestemmelseInfo_step4_1(arvningDbList, req.SessionId);
                 }
 
+                if (req.VedgoerendeOrganisationArvingeList.Count > 0)
+                {
+
+                    var arvningDbList = mappingHelper.MapModelOrganisationArvingerListToDBOrganisationArvingerList(req.VedgoerendeOrganisationArvingeList);
+                    testamenta_repo.saveBestemmelseInfo_step4_2(arvningDbList, req.SessionId);
+                }
+
                 return req.SessionId;
+
             }
             else
             {
                 return "Invalid SessionId";
             }
 
-
         }
+        
+        public string saveBestemmelseInfo_step5(TestamentaBestemmelseSpgFemRequest req) {
+
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                testamenta_repo.saveBestemmelseInfo_step5(req.Skal_arvingens_boern_arve_hvis_arvingen_er_gaeet_bort_foer_Jer, req.SessionId);
+
+                if (req.ArvingerList.Count > 0)
+                {
+
+                    var arvningDbList = mappingHelper.MapModelArvingerListToDBArvingerList(req.ArvingerList);
+                    testamenta_repo.saveBestemmelseInfo_step5_1(arvningDbList, req.SessionId);
+                }
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+        
+        public string saveYderligereInfo_step1(TestamentaYderligereSpgEtRequest req) 
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                var mappedegnTestament = mappingHelper.MapModelTestamentaOpretterToDBTestamentOpretteNew(req.egnTestament);
+
+                testamenta_repo.saveYderligereInfo_step1(mappedegnTestament, req.SessionId);
+                    
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+        public string saveYderligereInfo_step2(TestamentaYderligereSpgToRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                var mappedPartnerTestament = mappingHelper.MapModelTestamentaOpretterToDBTestamentOpretteNew(req.partnerTestament);
+
+                testamenta_repo.saveYderligereInfo_step1(mappedPartnerTestament, req.SessionId);
+
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+
+        public string saveYderligereInfo_step3(TestamentaYderligereSpgTreRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                testamenta_repo.saveYderligereInfo_step2(req.Skal_boet_betale_for_vedligeholdelse_jeres_gravsted, req.SessionId);
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+        public string saveYderligereInfo_step4(TestamentaYderligereSpgFireRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists) {
+
+                var mappedegnbobestyre = mappingHelper.MapModelBebostyreTilDBBebostyre(req.Bobestyrer);
+
+
+                testamenta_repo.saveYderligereInfo_step3(req.Vil_i_indsaette_en_bobestyrer, mappedegnbobestyre, req.SessionId);
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+        public string saveYderligereInfo_step5(TestamentaYderligereSpgFemRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+
+                testamenta_repo.saveYderligereInfo_step4(req.Vil_i_lade_laengstlevende_kunne_aendre_i_testamentet, req.Begraensning, req.Begrundelse_for_mulig_aendring, req.SessionId);
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+        public string saveYderligereInfo_step6(TestamentaYderligereSpgSeksRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                var mappedegnTestament = mappingHelper.MapModelTestamentaOpretterToDBTestamentOpretteNew(req.EgnTestament);
+
+                testamenta_repo.saveYderligereInfo_step5(mappedegnTestament, req.SessionId);
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+        public string saveYderligereInfo_step7(TestamentaYderligereSpgSyvRequest req)
+        {
+            var exists = session_repo.sessionExists(req.SessionId);
+
+            if (exists)
+            {
+                var mappedPartnerTestament = mappingHelper.MapModelTestamentaOpretterToDBTestamentOpretteNew(req.PartnerTestament);
+
+                testamenta_repo.saveYderligereInfo_step5(mappedPartnerTestament, req.SessionId);
+
+                return req.SessionId;
+            }
+            else
+            {
+                return "Invalid SessionId";
+            }
+        }
+
+
 
     }
 }

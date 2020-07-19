@@ -59,27 +59,40 @@
     <Compile Include="Arvinger.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Arvning.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bobestyrer.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="CREDENTIALS_API.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Arvinge.cs" />
-    <Compile Include="Model\ArvningFordeling.cs" />
+    <Compile Include="Model\ArvingeOLD.cs" />
+    <Compile Include="Model\DBArvningFordeling.cs" />
+    <Compile Include="Model\DBAdresse.cs" />
+    <Compile Include="Model\DBBobestyrer.cs" />
+    <Compile Include="Model\DBTestamentOpretter.cs" />
+    <Compile Include="Model\DBVaerge.cs" />
     <Compile Include="Model\Session.cs" />
-    <Compile Include="Model\TestamentaStepEtSpgEt.cs" />
-    <Compile Include="Model\TestamentaStepEtSpgFem.cs" />
-    <Compile Include="Model\TestamentaStepEtSpgFire.cs" />
-    <Compile Include="Model\TestamentaStepEtSpgTo.cs" />
-    <Compile Include="Model\TestamentaStepEtSpgTre.cs" />
+    <Compile Include="Model\OLDTestamentaStepEtSpgEt.cs" />
+    <Compile Include="Model\OLDTestamentaStepEtSpgFem.cs" />
+    <Compile Include="Model\OLDTestamentaStepEtSpgFire.cs" />
+    <Compile Include="Model\OLDTestamentaStepEtSpgTo.cs" />
+    <Compile Include="Model\OLDTestamentaStepEtSpgTre.cs" />
     <Compile Include="Model\Organisation.cs" />
-    <Compile Include="Model\TestamentaStepToSpgEt.cs" />
-    <Compile Include="Model\TestamentaStepToSpgFire.cs" />
-    <Compile Include="Model\TestamentaStepToSpgTo.cs" />
-    <Compile Include="Model\TestamentaStepToSpgTre.cs" />
-    <Compile Include="Model\TestamentaStepTreSpgEt.cs" />
-    <Compile Include="Model\TestamentaStepTreSpgTo.cs" />
-    <Compile Include="Model\VedgoerendeOrganisationArvinge.cs" />
+    <Compile Include="Model\OLDTestamentaStepToSpgEt.cs" />
+    <Compile Include="Model\OLDTestamentaStepToSpgFire.cs" />
+    <Compile Include="Model\OLDTestamentaStepToSpgTo.cs" />
+    <Compile Include="Model\OLDTestamentaStepToSpgTre.cs" />
+    <Compile Include="Model\OLDTestamentaStepTreSpgEt.cs" />
+    <Compile Include="Model\OLDTestamentaStepTreSpgTo.cs" />
+    <Compile Include="Model\OLDVedgoerendeOrganisationArvinge.cs" />
     <Compile Include="OrganisationArvinger.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganisationArvning.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\IOrganisationer_repository.cs" />
@@ -110,7 +123,16 @@
     <Compile Include="TestamentaOpretter.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Testamenta_form.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Testamenta_form_API.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestamentOpretter.cs">
+      <DependentUpon>TemplateFormModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vaerge.cs">
       <DependentUpon>TemplateFormModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VedgoerendeOrganisation.cs">

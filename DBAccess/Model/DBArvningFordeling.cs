@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DBAccess.Model
 {
-    public class TestamentaStepTreSpgTo
+    public class DBArvningFordeling
     {
-        public bool Skal_arvingerne_have_saereje_med_arven { get; set; }
+        public decimal ArvningId { get; set; }
+
+        public string Ejendele { get; set; }
     }
 }
