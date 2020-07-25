@@ -33,7 +33,7 @@ namespace DineArvningerServiceApi.Models.DomainModels
 
         public bool Vil_du_indsaette_en_vaerge_for_boernene_hvis_du_gaar_bort { get; set; }
 
-        public Vaerge Vaerge { get; set; }
+        public ModelVaerge Vaerge { get; set; }
 
         public string RelationTilVaerge { get; set; }
 

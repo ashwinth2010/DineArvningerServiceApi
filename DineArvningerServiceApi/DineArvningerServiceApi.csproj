@@ -182,8 +182,9 @@
     <Compile Include="Models\DomainModels\ArvingeOrganisation.cs" />
     <Compile Include="Models\DomainModels\Bobestyrer.cs" />
     <Compile Include="Models\DomainModels\Organisation.cs" />
+    <Compile Include="Models\DomainModels\TestamentForm.cs" />
     <Compile Include="Models\DomainModels\TestamentOpretter.cs" />
-    <Compile Include="Models\DomainModels\Vaerge.cs" />
+    <Compile Include="Models\DomainModels\ModelVaerge.cs" />
     <Compile Include="Models\Requests\TestamentProdukt\Arvinger_step2\TestamentaArvningSpgEtRequest.cs" />
     <Compile Include="Models\Requests\TestamentProdukt\Bestemmelser_step4\TestamentaBestemmelseSpgEtRequest.cs" />
     <Compile Include="Models\Requests\TestamentProdukt\Bestemmelser_step4\TestamentaBestemmelseSpgFireRequest.cs" />

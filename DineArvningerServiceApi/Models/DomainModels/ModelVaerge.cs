@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DineArvningerServiceApi.Models.DomainModels
 {
-    public class Vaerge
+    public class ModelVaerge
     {
         public string Navn { get; set; }
 

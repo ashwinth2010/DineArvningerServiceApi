@@ -21,7 +21,7 @@ namespace DineArvningerServiceApi.Models.DomainModels
 
 		public bool ErLever { get; set; }
 
-		public decimal FordelingIPct { get; set; }
+		public double FordelingIPct { get; set; }
 
 		public string Ejendele { get; set; }
 

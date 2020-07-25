@@ -98,5 +98,17 @@ namespace DBAccess.Repositories
         //Generel
         //int GetTestamentFormId(string sessionId);
 
+        Testamenta_form GetTestamenta_Form(string sessionId);
+
+        TestamentaOpretter GetTestamentaOpretter(int testanentOpretteId);
+
+        List<Arvning> GetArvningList(int formId);
+
+        List<OrganisationArvning> GetOrganisationArvningList(int formId);
+
+        Vaerge GetVaerge(int vaergeId);
+
+        Adresse GetAdresse(int adresseId);
+
     }
 }
