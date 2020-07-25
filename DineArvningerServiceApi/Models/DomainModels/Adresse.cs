@@ -9,12 +9,12 @@ namespace DineArvningerServiceApi.Models.DomainModels
     {
         public string Adressen { get; set; }
 
-        public int Postnummer { get; set; }
+        public int? Postnummer { get; set; }
 
         public string Email { get; set; }
 
-        public int telefonNummer { get; set; }
+        public int? telefonNummer { get; set; }
 
-        public DateTime Foedselsdagsdato { get; set; }
+        public DateTime? Foedselsdagsdato { get; set; }
     }
 }

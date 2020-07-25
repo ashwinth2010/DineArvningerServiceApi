@@ -1,4 +1,5 @@
 ﻿using DBAccess.Model;
+using DineArvningerServiceApi.Models.DomainModels;
 using DineArvningerServiceApi.Models.Requests;
 using DineArvningerServiceApi.Models.Requests.TestamentProdukt.Bestemmelser_step4;
 using DineArvningerServiceApi.Services;
@@ -263,6 +264,18 @@ namespace DineArvningerServiceApi.Controllers
             string sessionId = service.saveYderligereInfo_step7(req);
 
             return sessionId;
+        }
+
+
+        [HttpGet]
+        public TestamentForm GetTestamentForm(string sessionId) {
+
+            TestamentaHandlerService service = new TestamentaHandlerService();
+
+            var testamentForm = service.GetTestamentForm(sessionId);
+
+            return testamentForm;
+
         }
 
 

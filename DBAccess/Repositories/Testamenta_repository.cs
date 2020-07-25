@@ -989,5 +989,82 @@ namespace DBAccess.Repositories
                 }
             }
         }
+
+        public Testamenta_form GetTestamenta_Form(string sessionId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                Testamenta_form testamentForm = dbContext.Testamenta_form.SingleOrDefault(x => x.Session_Id == sessionId);
+
+                return testamentForm;
+
+            }
+            //throw new NotImplementedException();
+        }
+
+        public TestamentOpretter GetTestamentaOpretter(int testanentOpretteId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                TestamentOpretter testamentOpretter = dbContext.TestamentOpretter.SingleOrDefault(x => x.Id == testanentOpretteId);
+
+                return testamentOpretter;
+
+            }
+            //throw new NotImplementedException();
+        }
+
+        public List<Arvning> GetArvningList(int formId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                List<Arvning> ArvningeList = dbContext.Arvning.Where(x => x.Testament_Form_Id == formId).ToList();
+
+                return ArvningeList;
+
+            }
+            //throw new NotImplementedException();
+        }
+
+        public List<OrganisationArvning> GetOrganisationArvningList(int formId)
+        {
+            //throw new NotImplementedException();
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                List<OrganisationArvning> orgArvningeList = dbContext.OrganisationArvning.Where(x => x.Testament_Form_Id == formId).ToList();
+
+                return orgArvningeList;
+
+            }
+        }
+
+        TestamentaOpretter ITestamenta_repository.GetTestamentaOpretter(int testanentOpretteId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vaerge GetVaerge(int vaergeId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                Vaerge vaerge = dbContext.Vaerge.SingleOrDefault(x => x.Id == vaergeId);
+
+                return vaerge;
+
+            }
+            //throw new NotImplementedException();
+        }
+
+        public Adresse GetAdresse(int adresseId)
+        {
+            using (dinearvningerEntities dbContext = new dinearvningerEntities())
+            {
+                Adresse adresse = dbContext.Adresse.SingleOrDefault(x => x.Id == adresseId);
+
+                return adresse;
+
+            }
+            //throw new NotImplementedException();
+        }
     }
 }

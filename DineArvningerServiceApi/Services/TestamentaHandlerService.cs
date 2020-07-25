@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+//using DBAccess;
 using DBAccess.Model;
 using DBAccess.Repositories;
 using DineArvningerServiceApi.MappingHelper;
+using DineArvningerServiceApi.Models.DomainModels;
 using DineArvningerServiceApi.Models.Requests;
 using DineArvningerServiceApi.Models.Requests.TestamentProdukt.Bestemmelser_step4;
 
@@ -542,7 +544,109 @@ namespace DineArvningerServiceApi.Services
             }
         }
 
+        public TestamentForm GetTestamentForm(string sessionId) {
+
+            var exists = session_repo.sessionExists(sessionId);
+
+            if (exists)
+            {
+                var dbTestamentForm = testamenta_repo.GetTestamenta_Form(sessionId);
+
+                TestamentForm testamentForm = mappingHelper.MapDbTestamentformToModelTestamentForm(dbTestamentForm);
 
 
+                var dbArvingeList = testamenta_repo.GetArvningList(dbTestamentForm.Id);
+                List<Arvinge> arvningList = null;
+
+                if (dbArvingeList != null && dbArvingeList.Count > 0) { arvningList = mappingHelper.MapDBArvingerListToModelArvingerList(dbArvingeList); }
+                
+                var dbOrganisationArvningList = testamenta_repo.GetOrganisationArvningList(dbTestamentForm.Id);
+                List<ArvingeOrganisation> organisationArvningList = null;
+
+                if (dbOrganisationArvningList != null && dbOrganisationArvningList.Count > 0) { organisationArvningList = mappingHelper.MapDBOrganisationArvingerListToModelOrganisationArvingerList(dbOrganisationArvningList); }
+
+
+                TestamentOpretter egnTestamentOpretter = null;
+                TestamentOpretter PartnerTestamentOpretter = null;
+
+
+                if (dbTestamentForm.Egn_testamentOpretterId != null && dbTestamentForm.Egn_testamentOpretterId > 0) {
+
+                    var egnTestamentOpretterId = (int)dbTestamentForm.Egn_testamentOpretterId;
+
+                    var dbEgnTestamentOpretter = testamenta_repo.GetTestamentaOpretter(egnTestamentOpretterId);
+
+                    egnTestamentOpretter = mappingHelper.MapDBTestamentaOpretterToModelTestamentOprette(dbEgnTestamentOpretter);
+
+                    if (dbEgnTestamentOpretter.VaergeId != null && dbEgnTestamentOpretter.VaergeId > 0) {
+
+                        var egnTestamentVaergeId = (int)dbEgnTestamentOpretter.VaergeId;
+
+                        var dbEgnvaerge = testamenta_repo.GetVaerge(egnTestamentVaergeId);
+
+                        var egnvaerge = mappingHelper.MapDbVaergeToModelVaerge(dbEgnvaerge);
+
+                        egnTestamentOpretter.Vaerge = egnvaerge;
+                    }
+
+                    if (dbEgnTestamentOpretter.AdresseId != null && dbEgnTestamentOpretter.AdresseId > 0) {
+
+                        var egnAdresseId = (int)dbEgnTestamentOpretter.AdresseId;
+
+                        var dbEgnAdresse = testamenta_repo.GetAdresse(egnAdresseId);
+
+                        var egnAdresse = mappingHelper.MapDbAdresseToModelAdresse(dbEgnAdresse);
+
+                        egnTestamentOpretter.Adresse = egnAdresse;
+                    }
+                }
+
+                if (dbTestamentForm.Partner_testamentOpretterId != null && dbTestamentForm.Partner_testamentOpretterId > 0)
+                {
+
+                    var partnerTestamentOpretterId = (int)dbTestamentForm.Partner_testamentOpretterId;
+
+                    var dbPartnerTestamentOpretter = testamenta_repo.GetTestamentaOpretter(partnerTestamentOpretterId);
+
+                    PartnerTestamentOpretter = mappingHelper.MapDBTestamentaOpretterToModelTestamentOprette(dbPartnerTestamentOpretter);
+
+                    if (dbPartnerTestamentOpretter.VaergeId != null && dbPartnerTestamentOpretter.VaergeId > 0)
+                    {
+
+                        var partnerTestamentVaergeId = (int)dbPartnerTestamentOpretter.VaergeId;
+
+                        var dbPartnerVaerge = testamenta_repo.GetVaerge(partnerTestamentVaergeId);
+
+                        var partnerVaerge = mappingHelper.MapDbVaergeToModelVaerge(dbPartnerVaerge);
+
+                        PartnerTestamentOpretter.Vaerge = partnerVaerge;
+                    }
+
+                    if (dbPartnerTestamentOpretter.AdresseId != null && dbPartnerTestamentOpretter.AdresseId > 0)
+                    {
+
+                        var partnerAdresseId = (int)dbPartnerTestamentOpretter.AdresseId;
+
+                        var dbpartnerAdresse = testamenta_repo.GetAdresse(partnerAdresseId);
+
+                        var partnerAdresse = mappingHelper.MapDbAdresseToModelAdresse(dbpartnerAdresse);
+
+                        PartnerTestamentOpretter.Adresse = partnerAdresse;
+                    }
+                }
+
+                testamentForm.Egn_testamentOpretter = egnTestamentOpretter;
+                testamentForm.Partner_testamentOpretter = PartnerTestamentOpretter;
+                testamentForm.Arvning = arvningList;
+                testamentForm.OrganisationArvning = organisationArvningList;
+                testamentForm.bobestyrer = null;
+
+                return testamentForm;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
